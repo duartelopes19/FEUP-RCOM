@@ -21,6 +21,12 @@
 
 #define BUF_SIZE 256
 
+#define FLAG 0x7E
+#define A_RECEIVER 0x03
+#define A_SENDER 0x01
+#define C_SET 0x03
+#define C_UA 0x07
+
 volatile int STOP = FALSE;
 
 int main(int argc, char *argv[])
@@ -88,8 +94,18 @@ int main(int argc, char *argv[])
 
     printf("New termios structure set\n");
 
+    //SET
+    unsigned char set[5] = {0};
+
+    while(state != STOP) {
+        read(fd,set,1);
+        
+    }
+
+
+
     // Loop for input
-    unsigned char buf[BUF_SIZE + 1] = {0}; // +1: Save space for the final '\0' char
+    // unsigned char buf[BUF_SIZE + 1] = {0}; // +1: Save space for the final '\0' char
 
     /* while (STOP == FALSE)
     {
@@ -102,13 +118,14 @@ int main(int argc, char *argv[])
             STOP = TRUE;
     } */
 
-    while (STOP == FALSE)
+
+   /*  while (STOP == FALSE)
     {
         int bytes = read(fd, buf, BUF_SIZE+1);
         buf[bytes] = '\0';
         printf("%s:%d\n", buf, bytes);
         write(fd, buf, strlen(buf)+1);
-    }
+    } */
 
     // The while() cycle should be changed in order to respect the specifications
     // of the protocol indicated in the Lab guide
