@@ -21,6 +21,12 @@
 
 #define BUF_SIZE 256
 
+#define FLAG 0x7E
+#define A_RECEIVER 0x03
+#define A_SENDER 0x01
+#define C_SET 0x03
+#define C_UA 0x07
+
 volatile int STOP = FALSE;
 
 int main(int argc, char *argv[])
@@ -88,6 +94,11 @@ int main(int argc, char *argv[])
     }
 
     printf("New termios structure set\n");
+
+    //SET
+    unsigned char set[5] = {FLAG,A_SENDER,C_SET,A_SENDER^C_SET,FLAG};
+
+    write(fd,set,5);
 
     // Create string to send
     unsigned char buf[BUF_SIZE] = {0};

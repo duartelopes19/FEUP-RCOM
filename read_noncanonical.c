@@ -21,6 +21,12 @@
 
 #define BUF_SIZE 256
 
+#define FLAG 0x7E
+#define A_RECEIVER 0x03
+#define A_SENDER 0x01
+#define C_SET 0x03
+#define C_UA 0x07
+
 volatile int STOP = FALSE;
 
 int main(int argc, char *argv[])
@@ -88,6 +94,19 @@ int main(int argc, char *argv[])
 
     printf("New termios structure set\n");
 
+    //SET
+    unsigned char set[5] = {0};
+
+    while(STOP == FALSE) {
+        read(fd,set,5);
+        if(set[0]==FLAG && set[1]==A_SENDER && set[2]==C_SET && set[1]^set[2]==set[3] && set[4]==FLAG) {
+            STOP = TRUE;
+            printf("correct\n");
+        }
+    }
+
+
+
     // Loop for input
     unsigned char buf[BUF_SIZE + 1] = {0}; // +1: Save space for the final '\0' char
 
@@ -101,6 +120,7 @@ int main(int argc, char *argv[])
         if (buf[0] == 'z')
             STOP = TRUE;
     } */
+
 
     while (STOP == FALSE)
     {
