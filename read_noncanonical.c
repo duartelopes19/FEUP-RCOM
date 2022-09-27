@@ -97,18 +97,15 @@ int main(int argc, char *argv[])
     //SET
     unsigned char set[5] = {0};
 
-    while(STOP == FALSE) {
-        read(fd,set,5);
-        if(set[0]==FLAG && set[1]==A_SENDER && set[2]==C_SET && set[1]^set[2]==set[3] && set[4]==FLAG) {
-            STOP = TRUE;
-            printf("correct\n");
-        }
+    while(state != STOP) {
+        read(fd,set,1);
+        
     }
 
 
 
     // Loop for input
-    unsigned char buf[BUF_SIZE + 1] = {0}; // +1: Save space for the final '\0' char
+    // unsigned char buf[BUF_SIZE + 1] = {0}; // +1: Save space for the final '\0' char
 
     /* while (STOP == FALSE)
     {
@@ -122,13 +119,13 @@ int main(int argc, char *argv[])
     } */
 
 
-    while (STOP == FALSE)
+   /*  while (STOP == FALSE)
     {
         int bytes = read(fd, buf, BUF_SIZE+1);
         buf[bytes] = '\0';
         printf("%s:%d\n", buf, bytes);
         write(fd, buf, strlen(buf)+1);
-    }
+    } */
 
     // The while() cycle should be changed in order to respect the specifications
     // of the protocol indicated in the Lab guide

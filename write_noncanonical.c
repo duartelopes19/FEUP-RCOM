@@ -97,40 +97,39 @@ int main(int argc, char *argv[])
 
     //SET
     unsigned char set[5] = {FLAG,A_SENDER,C_SET,A_SENDER^C_SET,FLAG};
-
     write(fd,set,5);
 
     // Create string to send
-    unsigned char buf[BUF_SIZE] = {0};
+    // unsigned char buf[BUF_SIZE] = {0};
 
     /* for (int i = 0; i < BUF_SIZE; i++)
     {
         buf[i] = 'a' + i % 26;
     } */
 
-    gets(buf);
+    // gets(buf);
 
     // In non-canonical mode, '\n' does not end the writing.
     // Test this condition by placing a '\n' in the middle of the buffer.
     // The whole buffer must be sent even with the '\n'.
     // buf[5] = '\n';
 
-    int bytes = write(fd, buf, strlen(buf)+1);
-    printf("%d bytes written\n", bytes);
+    // int bytes = write(fd, buf, strlen(buf)+1);
+    // printf("% */d bytes written\n", bytes);
 
     // Wait until all bytes have been written to the serial port
-    sleep(1);
+    // sleep(1);
 
-    unsigned char received[BUF_SIZE + 1] = {0};
+    // unsigned char received[BUF_SIZE + 1] = {0};
 
-    bytes = read(fd, received, BUF_SIZE);
-    received[bytes] = '\0'; // Set end of string to '\0', so we can printf
+    // bytes = read(fd, received, BUF_SIZE);
+    // received[bytes] = '\0'; // Set end of string to '\0', so we can printf
 
-    if(strcmp(buf,received)) {
+    /* if(strcmp(buf,received)) {
         printf("%s\n","Error");
     } else {
         printf("%s\n","Check");
-    }
+    } */
 
     // Restore the old port settings
     if (tcsetattr(fd, TCSANOW, &oldtio) == -1)
