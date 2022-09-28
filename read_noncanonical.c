@@ -27,7 +27,14 @@
 #define C_SET 0x03
 #define C_UA 0x07
 
-volatile int STOP = FALSE;
+#define START 0
+#define STOP 1
+#define FLAG_RCV 2
+#define A_RCV 3
+#define C_RCV 4
+#define BCC_OK 5
+
+// volatile int STOP = FALSE;
 
 int main(int argc, char *argv[])
 {
@@ -94,13 +101,52 @@ int main(int argc, char *argv[])
 
     printf("New termios structure set\n");
 
-    //SET
-    unsigned char set[5] = {0};
+    //read SET
+    unsigned int state = START;
+    unsigned char bcc = 0;
+    unsigned char buf[1] = {0};
 
     while(state != STOP) {
-        read(fd,set,1);
-        
+        read(fd,buf,1);
+        switch (buf[0])
+        {
+        case FLAG:
+            if(state==BCC_OK) {
+                state = STOP;
+                break;
+            }
+            state = FLAG_RCV;
+            break;
+        case A_SENDER:
+            if(state==FLAG_RCV) {
+                state = A_RCV;
+                break;
+            }
+            state = START;
+            break;
+        case C_SET:
+            if(state==A_RCV) {
+                state = C_RCV;
+                break;
+            }
+            state = START;
+            break;
+        case A_SENDER^C_SET:
+            if(state==C_RCV) {
+                state = BCC_OK;
+                break;
+            }
+            state = START;
+            break;
+        default:
+            state = START;
+            break;
+        }
     }
+
+    // write UA
+    unsigned char ua[5] = {FLAG,A_RECEIVER,C_UA,A_RECEIVER^C_UA,FLAG};
+    write(fd,ua,5);
 
 
 
