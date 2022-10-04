@@ -115,20 +115,9 @@ int main(int argc, char *argv[])
     printf("New termios structure set\n");
 
     //write SET
-
     unsigned char set[5] = {FLAG,A_SENDER,C_SET,A_SENDER^C_SET,FLAG};
 
     (void)signal(SIGALRM, alarmHandler);
-
-    /* while (alarmCount < 2)
-    {
-        if (alarmEnabled == FALSE)
-        {
-            write(fd,set,5);
-            alarm(3); // Set alarm to be triggered in 3s
-            alarmEnabled = TRUE;
-        }
-    } */
 
     //read UA
     unsigned int state = START;
@@ -174,6 +163,7 @@ int main(int argc, char *argv[])
     }
     alarm(0);
 
+    
 
     // Create string to send
     // unsigned char buf[BUF_SIZE] = {0};
