@@ -10,6 +10,7 @@
 #include <sys/stat.h>
 #include <termios.h>
 #include <unistd.h>
+#include <signal.h>
 
 // Baudrate settings are defined in <asm/termbits.h>, which is
 // included by <termios.h>
@@ -34,7 +35,18 @@
 #define C_RCV 4
 #define BCC_OK 5
 
+int alarmEnabled = FALSE;
+int alarmCount = 0;
+
 //volatile int STOP = FALSE;
+
+void alarmHandler(int signal)
+{
+    alarmEnabled = FALSE;
+    alarmCount++;
+
+    printf("Alarm #%d\n", alarmCount);
+}
 
 int main(int argc, char *argv[])
 {
@@ -81,7 +93,7 @@ int main(int argc, char *argv[])
     // Set input mode (non-canonical, no echo,...)
     newtio.c_lflag = 0;
     newtio.c_cc[VTIME] = 0; // Inter-character timer unused
-    newtio.c_cc[VMIN] = 1;  // Blocking read until 5 chars received
+    newtio.c_cc[VMIN] = 0;  // Blocking read until 5 chars received
 
     // VTIME e VMIN should be changed in order to protect with a
     // timeout the reception of the following character(s)
@@ -103,51 +115,64 @@ int main(int argc, char *argv[])
     printf("New termios structure set\n");
 
     //write SET
+
     unsigned char set[5] = {FLAG,A_SENDER,C_SET,A_SENDER^C_SET,FLAG};
-    write(fd,set,5);
+
+    (void)signal(SIGALRM, alarmHandler);
+
+    /* while (alarmCount < 2)
+    {
+        if (alarmEnabled == FALSE)
+        {
+            write(fd,set,5);
+            alarm(3); // Set alarm to be triggered in 3s
+            alarmEnabled = TRUE;
+        }
+    } */
 
     //read UA
     unsigned int state = START;
-    unsigned char bcc = 0;
     unsigned char buf[1] = {0};
 
-    while(state != STOP) {
-        read(fd,buf,1);
-        switch (buf[0])
+    while(state != STOP && alarmCount <= 2) {
+        if (alarmEnabled == FALSE)
         {
-        case FLAG:
-            if(state==BCC_OK) {
-                state = STOP;
+            write(fd,set,5);
+            alarm(3); // Set alarm to be triggered in 3s
+            alarmEnabled = TRUE;
+        }
+        while (alarmEnabled == TRUE) {
+            if(read(fd,buf,1)==0) continue;
+            switch (state)
+            {
+            case START:
+                if (buf[0]==FLAG) state = FLAG_RCV;
+                break;
+            case FLAG_RCV:
+                if (buf[0]==FLAG) break;
+                else if (buf[0]==A_RECEIVER) state = A_RCV;
+                else state = START;
+                break;
+            case A_RCV:
+                if (buf[0]==FLAG) state = FLAG_RCV;
+                else if (buf[0]==C_UA) state = C_RCV;
+                else state = START;
+                break;
+            case C_RCV:
+                if (buf[0]==FLAG) state = FLAG_RCV;
+                else if (buf[0]==A_RECEIVER^C_UA) state = BCC_OK;
+                else state = START;
+                break;
+            case BCC_OK:
+                if (buf[0]==FLAG) state = STOP;
+                else state = START;
+                break;
+            default:
                 break;
             }
-            state = FLAG_RCV;
-            break;
-        case A_RECEIVER:
-            if(state==FLAG_RCV) {
-                state = A_RCV;
-                break;
-            }
-            state = START;
-            break;
-        case C_UA:
-            if(state==A_RCV) {
-                state = C_RCV;
-                break;
-            }
-            state = START;
-            break;
-        case A_RECEIVER^C_UA:
-            if(state==C_RCV) {
-                state = BCC_OK;
-                break;
-            }
-            state = START;
-            break;
-        default:
-            state = START;
-            break;
         }
     }
+    alarm(0);
 
 
     // Create string to send

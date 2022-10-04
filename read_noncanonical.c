@@ -103,43 +103,35 @@ int main(int argc, char *argv[])
 
     //read SET
     unsigned int state = START;
-    unsigned char bcc = 0;
     unsigned char buf[1] = {0};
 
     while(state != STOP) {
-        read(fd,buf,1);
-        switch (buf[0])
+        if(read(fd,buf,1)==0) continue;
+        switch (state)
         {
-        case FLAG:
-            if(state==BCC_OK) {
-                state = STOP;
-                break;
-            }
-            state = FLAG_RCV;
+        case START:
+            if (buf[0]==FLAG) state = FLAG_RCV;
             break;
-        case A_SENDER:
-            if(state==FLAG_RCV) {
-                state = A_RCV;
-                break;
-            }
-            state = START;
+        case FLAG_RCV:
+            if (buf[0]==FLAG) break;
+            else if (buf[0]==A_SENDER) state = A_RCV;
+            else state = START;
             break;
-        case C_SET:
-            if(state==A_RCV) {
-                state = C_RCV;
-                break;
-            }
-            state = START;
+        case A_RCV:
+            if (buf[0]==FLAG) state = FLAG_RCV;
+            else if (buf[0]==C_SET) state = C_RCV;
+            else state = START;
             break;
-        case A_SENDER^C_SET:
-            if(state==C_RCV) {
-                state = BCC_OK;
-                break;
-            }
-            state = START;
+        case C_RCV:
+            if (buf[0]==FLAG) state = FLAG_RCV;
+            else if (buf[0]==A_SENDER^C_SET) state = BCC_OK;
+            else state = START;
+            break;
+        case BCC_OK:
+            if (buf[0]==FLAG) state = STOP;
+            else state = START;
             break;
         default:
-            state = START;
             break;
         }
     }
@@ -147,7 +139,6 @@ int main(int argc, char *argv[])
     // write UA
     unsigned char ua[5] = {FLAG,A_RECEIVER,C_UA,A_RECEIVER^C_UA,FLAG};
     write(fd,ua,5);
-
 
 
     // Loop for input
