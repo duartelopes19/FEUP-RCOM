@@ -28,6 +28,8 @@
 #define C_SET 0x03
 #define C_UA 0x07
 
+#define ESC 0x7d
+
 #define START 0
 #define STOP 1
 #define FLAG_RCV 2
@@ -162,7 +164,41 @@ int main(int argc, char *argv[])
         }
     }
     alarm(0);
+    alarmCount = 0;
+    alarmEnabled = FALSE;
 
+
+    // I(0)
+    unsigned char buf1[BUF_SIZE] = {0};
+    gets(buf1);
+    int buf_size = strlen(buf1)+6;
+
+    unsigned char I[BUF_SIZE] = {0};
+    I[0] = FLAG;
+    I[1] = A_SENDER;
+    I[2] = 0x00;
+    I[3] = A_SENDER^0x00;
+
+    unsigned char bcc2 = 0;
+    int pos = 4;
+    for (int i = 0; i < BUF_SIZE; i++)
+    {
+        if(buf1[i]==FLAG) {
+            buf1[i]=(ESC+0x5e);
+        }
+        else if(buf1[i]==ESC) {
+            buf1[i]=(ESC+0x5d);
+        }
+        bcc2=bcc2^buf1[i];
+        I[pos]=buf1[i];
+        pos++;
+    }
+
+    I[pos] = bcc2;
+    pos++;
+    I[pos] = FLAG;
+
+    write(fd,I,pos+1);
     
 
     // Create string to send
