@@ -123,6 +123,7 @@ int main(int argc, char *argv[])
     unsigned int state = START;
     unsigned char buf[1] = {0};
 
+
     while(state != STOP && alarmCount <= 2) {
         if (alarmEnabled == FALSE)
         {
@@ -181,15 +182,21 @@ int main(int argc, char *argv[])
     for (int i = 0; i < BUF_SIZE; i++)
     {
         if(buf1[i]=='\0') break;
+        bcc2=bcc2^buf1[i];
         if(buf1[i]==FLAG) {
-            buf1[i]=(ESC+0x5e);
+            I[pos]= ESC;
+            I[pos+1]=0x5e;
+            pos+=2;
         }
         else if(buf1[i]==ESC) {
-            buf1[i]=(ESC+0x5d);
+            I[pos]= ESC;
+            I[pos+1]=0x5d;
+            pos+=2;
         }
-        bcc2=bcc2^buf1[i];
+        else{
         I[pos]=buf1[i];
         pos++;
+        }
     }
 
     I[pos] = bcc2;
