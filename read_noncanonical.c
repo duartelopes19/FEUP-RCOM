@@ -27,12 +27,15 @@
 #define C_SET 0x03
 #define C_UA 0x07
 
+#define ESC 0x7d
+
 #define START 0
 #define STOP 1
 #define FLAG_RCV 2
 #define A_RCV 3
 #define C_RCV 4
 #define BCC_OK 5
+#define BCC_READ 6
 
 // volatile int STOP = FALSE;
 
@@ -139,6 +142,64 @@ int main(int argc, char *argv[])
     // write UA
     unsigned char ua[5] = {FLAG,A_RECEIVER,C_UA,A_RECEIVER^C_UA,FLAG};
     write(fd,ua,5);
+
+    // read I(0)
+    state = START;
+    unsigned char buf1[BUF_SIZE] = {0};
+    unsigned char bcc2 = 0;
+    int i = 0;
+
+    while(state != STOP) {
+        if(read(fd,buf,1)==0) continue;
+        switch (state)
+        {
+        case START:
+            if (buf[0]==FLAG) state = FLAG_RCV;
+            break;
+        case FLAG_RCV:
+            if (buf[0]==FLAG) break;
+            else if (buf[0]==A_SENDER) state = A_RCV;
+            else state = START;
+            break;
+        case A_RCV:
+            if (buf[0]==FLAG) state = FLAG_RCV;
+            else if (buf[0]==0x00) state = C_RCV;
+            else state = START;
+            break;
+        case C_RCV:
+            if (buf[0]==FLAG) state = FLAG_RCV;
+            else if (buf[0]==A_SENDER^0x00) {
+                state = BCC_READ;
+                i = 0;
+            }
+            else state = START;
+            break;
+        case BCC_READ:
+            if(buf[0]==(ESC+0x5e)) {
+                buf[0]=FLAG;
+            }
+            else if(buf[0]==(ESC+0x5d)) {
+                buf[0]=ESC;
+            }
+            if (buf[0]==bcc2) {
+                state = BCC_OK;
+                i = 0;
+            }
+            else {
+                bcc2=bcc2^buf[0];
+                buf1[i]=buf[0];
+                i++;
+            }
+            break;
+        case BCC_OK:
+            if (buf[0]==FLAG) state = STOP;
+            else state = START;
+            break;
+        default:
+            break;
+        }
+    }
+    
 
 
     // Loop for input

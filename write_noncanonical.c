@@ -46,8 +46,6 @@ void alarmHandler(int signal)
 {
     alarmEnabled = FALSE;
     alarmCount++;
-
-    printf("Alarm #%d\n", alarmCount);
 }
 
 int main(int argc, char *argv[])
@@ -171,7 +169,6 @@ int main(int argc, char *argv[])
     // I(0)
     unsigned char buf1[BUF_SIZE] = {0};
     gets(buf1);
-    int buf_size = strlen(buf1)+6;
 
     unsigned char I[BUF_SIZE] = {0};
     I[0] = FLAG;
@@ -183,6 +180,7 @@ int main(int argc, char *argv[])
     int pos = 4;
     for (int i = 0; i < BUF_SIZE; i++)
     {
+        if(buf1[i]=='\0') break;
         if(buf1[i]==FLAG) {
             buf1[i]=(ESC+0x5e);
         }
