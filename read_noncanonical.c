@@ -146,7 +146,8 @@ int main(int argc, char *argv[])
     // read I(0)
     state = START;
     unsigned char buf1[BUF_SIZE] = {0};
-    int i = 0;
+    
+    int i = 0, j = 0;
 
     while(state != STOP) {
         if(read(fd,buf,1)==0) continue;
@@ -174,14 +175,40 @@ int main(int argc, char *argv[])
             else state = START;
             break;
         case BCC_READ:
-            buf1[i]=buf[0];
-            i++;
+            buf1[j]=buf[0];
+            j++;
             if (buf[0]==FLAG) state = STOP;
             break;
         default:
             break;
         }
     }
+    unsigned char buf2[j] = {0};
+    for (int k = 0, x = 0 ; k < j-1 ; k++,x++){
+        if (buf1[k] == ESC){
+            if(buf1[k+1] == 0x5e){
+                buf2[x] = FLAG;
+                k++;
+            }
+            else if(buf1[k+1] == 0x5d){
+                buf2[k] = ESC;
+                k++;
+            }
+        }
+        else {
+            buf2[x] = buf1[k];
+        }
+        
+    }
+    if (k == (j-1)){
+        buf2[x] = buf1[k];
+    }
+
+    for(int y = 0; i <= x; y++){
+        bcc2 =bcc2^buf2[y]
+    }
+
+
     
 
 
