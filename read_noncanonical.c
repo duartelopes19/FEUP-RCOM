@@ -146,7 +146,6 @@ int main(int argc, char *argv[])
     // read I(0)
     state = START;
     unsigned char buf1[BUF_SIZE] = {0};
-    unsigned char bcc2 = 0;
     int i = 0;
 
     while(state != STOP) {
@@ -175,25 +174,9 @@ int main(int argc, char *argv[])
             else state = START;
             break;
         case BCC_READ:
-            if(buf[0]==(ESC+0x5e)) {
-                buf[0]=FLAG;
-            }
-            else if(buf[0]==(ESC+0x5d)) {
-                buf[0]=ESC;
-            }
-            if (buf[0]==bcc2) {
-                state = BCC_OK;
-                i = 0;
-            }
-            else {
-                bcc2=bcc2^buf[0];
-                buf1[i]=buf[0];
-                i++;
-            }
-            break;
-        case BCC_OK:
+            buf1[i]=buf[0];
+            i++;
             if (buf[0]==FLAG) state = STOP;
-            else state = START;
             break;
         default:
             break;
