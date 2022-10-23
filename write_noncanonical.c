@@ -36,6 +36,9 @@
 #define A_RCV 3
 #define C_RCV 4
 #define BCC_OK 5
+#define BCCUA A_RECEIVER^C_UA
+#define BCCRR A_RECEIVER^BCC_OK
+#define BCCREJ A_RECEIVER^STOP
 
 int alarmEnabled = FALSE;
 int alarmCount = 0;
