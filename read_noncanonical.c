@@ -36,6 +36,8 @@
 #define C_RCV 4
 #define BCC_OK 5
 #define BCC_READ 6
+#define BCC_RR A_RCV ^ BCC_OK
+#define BCC_REJ A_RCV ^ STOP
 
 // volatile int STOP = FALSE;
 
@@ -145,9 +147,11 @@ int main(int argc, char *argv[])
 
     // read I(0)
     state = START;
+    int bcc2 = 0;
+    int bcc2_received = 0;
     unsigned char buf1[BUF_SIZE] = {0};
     
-    int i = 0, j = 0;
+    int i = 0, d = 0, k = 0;
 
     while(state != STOP) {
         if(read(fd,buf,1)==0) continue;
@@ -175,66 +179,56 @@ int main(int argc, char *argv[])
             else state = START;
             break;
         case BCC_READ:
-            buf1[j]=buf[0];
-            j++;
+            buf1[d]=buf[0];
+            d++;
             if (buf[0]==FLAG) state = STOP;
             break;
         default:
             break;
         }
     }
-    unsigned char buf2[j] = {0};
-    for (int k = 0, x = 0 ; k < j-1 ; k++,x++){
-        if (buf1[k] == ESC){
-            if(buf1[k+1] == 0x5e){
-                buf2[x] = FLAG;
-                k++;
+
+    for (k=0;k<=d;k++){
+        if(buf1[k]==0x7d){
+            if(buf1[k+1]==0x5e){
+                buf1[k] = 0x7e;
             }
-            else if(buf1[k+1] == 0x5d){
-                buf2[k] = ESC;
-                k++;
+            else if(buf1[k+1]==0x5d){
+                buf1[k] = 0x7d;
+            }else{
+                continue;
             }
+            for (int j=i+2;j<=d;j++){
+                buf1[j-1]=buf1[j];
+            }
+            d--;
         }
-        else {
-            buf2[x] = buf1[k];
+    }
+
+    if(d>0){
+    	bcc2_received = buf1[d-1];
+    	buf1[d-1] = '\0';
+    	while(buf1[k]!='\0'){
+            bcc2^= buf1[k];
+            k++;
         }
-        
-    }
-    if (k == (j-1)){
-        buf2[x] = buf1[k];
-    }
-
-    for(int y = 0; i <= x; y++){
-        bcc2 =bcc2^buf2[y]
     }
     
+
+    unsigned char ans[BUF_SIZE]={0};
+    ans[0] = FLAG;
+    ans[1] = A_RECEIVER;
+    ans[4] = FLAG;
+    if (bcc2 == bcc2_received){
+    	ans[2] = BCC_OK;
+    	ans[3] = BCC_RR;
+    }else{
+    	ans[2] = STOP;
+    	ans[3] = BCC_REJ;
+    }
+    printf("%d %d %d %d %d", ans[0], ans[1], ans[2], ans[3], ans[4]);
+    write(fd,ans,BUF_SIZE);
     
-
-    
-
-
-    // Loop for input
-    // unsigned char buf[BUF_SIZE + 1] = {0}; // +1: Save space for the final '\0' char
-
-    /* while (STOP == FALSE)
-    {
-        // Returns after 5 chars have been input
-        int bytes = read(fd, buf, BUF_SIZE);
-        buf[bytes] = '\0'; // Set end of string to '\0', so we can printf
-
-        printf("%s:%d\n", buf, bytes);
-        if (buf[0] == 'z')
-            STOP = TRUE;
-    } */
-
-
-   /*  while (STOP == FALSE)
-    {
-        int bytes = read(fd, buf, BUF_SIZE+1);
-        buf[bytes] = '\0';
-        printf("%s:%d\n", buf, bytes);
-        write(fd, buf, strlen(buf)+1);
-    } */
 
     // The while() cycle should be changed in order to respect the specifications
     // of the protocol indicated in the Lab guide
