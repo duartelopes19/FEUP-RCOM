@@ -39,6 +39,10 @@
 #define BCC_RR A_RCV ^ BCC_OK
 #define BCC_REJ A_RCV ^ STOP
 
+struct termios oldtio;
+struct termios newtio;
+
+
 // volatile int STOP = FALSE;
 
 int main(int argc, char *argv[])
@@ -65,9 +69,7 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 
-    struct termios oldtio;
-    struct termios newtio;
-
+    
     // Save current port settings
     if (tcgetattr(fd, &oldtio) == -1)
     {

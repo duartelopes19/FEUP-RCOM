@@ -160,7 +160,7 @@ int llopen(char* serialPortName, LinkLayerRole role)
             while(state != STOP && alarmCount <= 2) {
             if (alarmEnabled == FALSE)
             {
-                write(fd,set,5);
+                write(fd,buf,5);
                 alarm(3); // Set alarm to be triggered in 3s
                 alarmEnabled = TRUE;
             }
@@ -238,29 +238,20 @@ int llopen(char* serialPortName, LinkLayerRole role)
     return fd;
 }
 
-////////////////////////////////////////////////
-// LLWRITE
-////////////////////////////////////////////////
-int llwrite(const unsigned char *buf, int bufSize)
+int llwrite(int fd, char * buffer, int length)
 {
     // TODO
 
     return 0;
 }
 
-////////////////////////////////////////////////
-// LLREAD
-////////////////////////////////////////////////
-int llread(unsigned char *packet)
+int llread(int fd, char * buffer)
 {
     // TODO
 
     return 0;
 }
 
-////////////////////////////////////////////////
-// LLCLOSE
-////////////////////////////////////////////////
 int llclose(int showStatistics)
 {
     // TODO
