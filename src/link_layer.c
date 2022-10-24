@@ -145,14 +145,97 @@ int llopen(char* serialPortName, LinkLayerRole role)
             buf[3] = A_SENDER^C_SET;
             buf[4] = FLAG;
 
-        void alarmHandler(int signal){
-            alarmEnabled = FALSE;
-            alarmCount++;
-        }
+            int alarmEnabled = FALSE;
+            int alarmCount = 0;
 
-        break;
+            void alarmHandler(int signal){
+                alarmEnabled = FALSE;
+                alarmCount++;
+            }
+
+            (void)signal(SIGALRM, alarmHandler);
+            unsigned int state = START;
+            unsigned char buf[1] = {0};
+
+            while(state != STOP && alarmCount <= 2) {
+            if (alarmEnabled == FALSE)
+            {
+                write(fd,set,5);
+                alarm(3); // Set alarm to be triggered in 3s
+                alarmEnabled = TRUE;
+            }
+            while (alarmEnabled == TRUE) {
+                if(read(fd,buf,1)==0) continue;
+                switch (state)
+                {
+                case START:
+                    if (buf[0]==FLAG) state = FLAG_RCV;
+                    break;
+                case FLAG_RCV:
+                    if (buf[0]==FLAG) break;
+                    else if (buf[0]==A_RECEIVER) state = A_RCV;
+                    else state = START;
+                    break;
+                case A_RCV:
+                    if (buf[0]==FLAG) state = FLAG_RCV;
+                    else if (buf[0]==C_UA) state = C_RCV;
+                    else state = START;
+                    break;
+                case C_RCV:
+                    if (buf[0]==FLAG) state = FLAG_RCV;
+                    else if (buf[0]==A_RECEIVER^C_UA) state = BCC_OK;
+                    else state = START;
+                    break;
+                case BCC_OK:
+                    if (buf[0]==FLAG) state = STOP;
+                    else state = START;
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+            alarm(0);
+            alarmCount = 0;
+            alarmEnabled = FALSE;
+            break;
         case RECEIVER:
-        break;
+            unsigned int state = START;
+            unsigned char buf[1] = {0};
+
+            while(state != STOP) {
+                if(read(fd,buf,1)==0) continue;
+                switch (state)
+                {
+                case START:
+                    if (buf[0]==FLAG) state = FLAG_RCV;
+                    break;
+                case FLAG_RCV:
+                    if (buf[0]==FLAG) break;
+                    else if (buf[0]==A_SENDER) state = A_RCV;
+                    else state = START;
+                    break;
+                case A_RCV:
+                    if (buf[0]==FLAG) state = FLAG_RCV;
+                    else if (buf[0]==C_SET) state = C_RCV;
+                    else state = START;
+                    break;
+                case C_RCV:
+                    if (buf[0]==FLAG) state = FLAG_RCV;
+                    else if (buf[0]==A_SENDER^C_SET) state = BCC_OK;
+                    else state = START;
+                    break;
+                case BCC_OK:
+                    if (buf[0]==FLAG) state = STOP;
+                    else state = START;
+                    break;
+                default:
+                    break;
+                }
+            }
+                break;
+        }
+    return fd;
 }
 
 ////////////////////////////////////////////////
