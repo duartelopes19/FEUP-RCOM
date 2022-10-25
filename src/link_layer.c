@@ -30,6 +30,7 @@
 #define C_UA 0x07
 #define START 0
 #define STOP 1
+#define DISC 11
 #define FLAG_RCV 2
 #define A_RCV 3
 #define C_RCV 4
@@ -37,6 +38,7 @@
 #define BCCUA A_RECEIVER^C_UA
 #define BCCRR A_RECEIVER^BCC_OK
 #define BCCREJ A_RECEIVER^STOP
+#define BCCDISC A_RECEIVER^DISC
 
 struct termios oldtio;
 struct termios newtio;
@@ -76,7 +78,7 @@ void applicationLayer(char* serialPort, LinkLayerRole role, int baudrate, int n_
             perror("Unable to receive role");
             exit(-1);
     }
-    llclose(app.fileDescriptor);
+    llclose(app.fileDescriptor, role);
 }
 
 
@@ -252,9 +254,135 @@ int llread(int fd, char * buffer)
     return 0;
 }
 
-int llclose(int showStatistics)
-{
-    // TODO
+int llclose(int fd,LinkLayerRole role){
+    switch(role){
+	    case TRANSMITTER:{
+	    unsigned char ans[BUF_SIZE];
+            ans[0] = FLAG;
+            ans[1] = A_RECEIVER;
+            ans[2] = DISC;
+            ans[3] = BCCDISC;
+            ans[4] = FLAG;
+            
+            unsigned char received[BUF_SIZE];
+            int receiv,bytes;
+            int alarmEnabled = FALSE;
+            int alarmCount = 0;
 
-    return 1;
+
+            void alarmHandler(int signal)
+            {
+                alarmEnabled = FALSE;
+                alarmCount++;
+            }
+
+            // Set alarm function handler
+            (void)signal(SIGALRM, alarmHandler);
+            int state = 0;
+            int STOP1 = FALSE;
+            int flag = 0;
+            while (alarmCount < 4 && !STOP)
+            {   
+                if (alarmEnabled == FALSE){
+                    bytes = write(fd,ans,BUF_SIZE);
+                    printf("DISC SENT\n");
+                    alarm(3);
+                    alarmEnabled = TRUE;   
+
+                }
+                receiv = read(fd,received,1);
+                if(receiv == 0){
+                    continue;
+                }
+                switch(received[0]){
+                    case FLAG:
+                        if(state == 4){
+                            printf("DISC RECEIVED\n");
+                            STOP1 = TRUE;
+                        }
+                        else
+                            state = 1;
+                        break;
+                    case A_RECEIVER:
+                        if(state == 1)
+                            state = 2;
+                        else
+                            state = 0;
+                        break;
+                    case DISC:
+                        if(state == 2)
+                            state = 3;
+                        else
+                            state = 0;
+                        break;
+                    case BCCDISC:
+                        if(state ==3)
+                            state =4;
+                        else 
+                            state = 0;
+                        break;
+                };
+                
+            }
+            if(!STOP){return -1;}
+            unsigned char conf[BUF_SIZE];
+            conf[0] = FLAG;
+            conf[1] = A_RECEIVER;
+            conf[2] = C_UA;
+            conf[3] = BCCUA;
+            conf[4] = FLAG;
+            bytes = write(fd,conf,BUF_SIZE);
+            printf("FINAL UA SENT\n");
+	    break;
+	    }
+	    
+	    case RECEIVER:{
+	      int STOP1 = FALSE;
+             int state = 0;
+             while(!STOP)
+             {   
+                unsigned char buf[BUF_SIZE];
+                int bytes = read(fd, buf, 1);
+                switch (buf[0])
+                {
+                case FLAG:
+		        if(state == 4){
+		            printf("Final UA RECEIVED\n");
+		            STOP1 = TRUE;
+		        }
+		        else
+		            state = 1;
+		        break;
+		case A_RECEIVER:
+		        if(state == 1)
+		            state = 2;
+		        else
+		            state = 0;
+		        break;
+		case C_UA:
+		        if(state == 2)
+		            state = 3;
+		        else
+		            state = 0;
+		        break;
+		case BCCUA:
+		        if(state ==3)
+		            state =4;
+		        else 
+		            state = 0;
+		        break;
+                };
+             }
+	     break;
+	    }
+    };
+    // Restore the old port settings
+    if (tcsetattr(fd, TCSANOW, &oldtio) == -1)
+    {
+        perror("tcsetattr");
+        exit(-1);
+    }
+
+    close(fd);
+    return 0;
 }
