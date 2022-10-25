@@ -1,92 +1,110 @@
-# RC_T12G7
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://git.fe.up.pt/up202006408/rc_t12g7.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://git.fe.up.pt/up202006408/rc_t12g7/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+GIF89a/\F5\00\00\F8\F8\F8\F0\F0\F0\E8\E8\E9\E0\E0\E0\D8\D8\D8\D0\D0\D0\C8\C8\C8\C0\C0\C0\B8\B8\B8\B0\B0\B0Ĵ\A4\A3\A3\A7\98\98\98\8A\8A\8C\80\80\80rrtbbdXXXKKK<<;UB,000###((@*B-S8cAtL\87X\92b\94t\A5p\A2\83\B2x\BD\84ȍ\C0\88՗ߢ\E9\B0\E3\BC
+մ\E0\C8\EE\CD\F1\C8\F7\C0\F6\B8\EE\CC!\F5\D8\EF\CB8\F5\D8>ج4\BC\8C<\A4\80<\A8|\8C`0\A0\8CtĤt\E0Ќ\C0\C0\E0\00\00\00\00\00\F8!\F9\00\00?\00,\00\00\00\00/\00\FF\C0\9FpH,\8FȤr\C9l:\9B\BE\A8tJ\F5=\AFجv\CB\EDz\BF`luL\9E\86\CF\E8\B4z\CD\97\DF\F0h{N\AF\DB\EFȸ~\8F\EF\FB\FF\80K{\83\83\81\86\87\88j\84\8B|\89\8E\8F\90y\8C\93z\91\96\97\87\94\9Aq\98\9D\9Es\9B\A1\9C\9F\A4\A5\\A2\A8p\A6\AB\ACJ\A9\9A\95\AD\B4\AD\AF\93\B1\BA\B1\A3\B5\BE\9D\B7\8C\B9\BBo\BFˑ\C1º\D2\C5\BCd\CCٙ΄\C3\E1\D2ֲ\D8\DA\E8x܋\DE\EF\DF\E4\D6e\E9\F6\A0\EB\DD\D37\FCICvm̽\83i\F2\E9\E3'\C1߃\DEI\A8V\90
+_\B2\B3p\C1\DD\C3\E3I\DBe\AE
+ƓZ4v\AB0\C1\9D\88!\C7,i\A5M&*W\B6|\E8\E0߃\FF\E3\E6U4s\B3\A8\A4\9Cq\F6U\00\F7\C0AϟA\8F\95\ABg\B4\AA\A4{\94\B6\F4\F7脯\C8t\D1;g\D5(V=Z\DD
+*\96$͚em\9EE\ABk\9A<cnc
+\85\F7\E4ܤ\FB\BE\AB\97Q_\94\E1\E4j\CB\EBm\A1\C3+\D6KYd\84\92'Nu\F9^f\C5\CE:\DB\FB\FCW4:\D2sMkC}Vu6֭]\FB\82[6-\DAXm\D7[7+\\8ESQ.\B77\94\EF\DFh)Wη\8F\E3D	\C1'_X\B9\D8
+уY\90qB\F6\C7\D3IM\AE\B2o"\C1\9C\DC\DF}\9F\FEӛ\E2Q\F8}+
+ñcU,@h \C1x{\F7d\AC_\E4\F8\86.\F9\E4\93.R`\C1\F8\F7&Y\B5E_\\E1$ր\E4\FFH\80\A4`\83\DFHՄ\97$\D5\D0~
+8\00\81\E68vdc䨣\8EH1\DEi\82"\85p\BC\E3\00:&\D8 X\8BXp#\92;\E6\98\C0$\B0@RX\80\8C\90CZr\A0?
+ \99\00,\C0\C0?S\ECCH62\00\A5\95	ĉ\C0p\80\95\A4i"_]:\F27<\90#@\E56\96\B4a\80S\\A2\9B:\C69\E6\9CTZ\80	\80\D4_\96\94\F4\D9
+\BA@\94Z\A8\95-:\80\A5&\B2\A6\94r\CEI\E7@\C0\A9\8860}\84x
+I\80
+\E9Hh\A9\86.\80@\88N\AD\BAǋa\CEI쭖Pk\A1e\E6\BA\E9&\BE>\EACRk(\C0C\8E\AA"\C1KH \FF@\00\00\B4뮻ph\AE\BAZ\96-"dk\EC\98\BC\EB\EF\F2\A9\EB\FAkp\BBj#*\F7\E2K\DE~cp\B0\C1\D7\C2\E1\E4\EAN\AC\F1\00\DChoÁ\8C\81\81\A0\E0.\BBPq\D0J\00\CA/ A&@!~\F2d@\B0\C0\BB"}\F3\C0\C1\E8р\CB0\BB\EB\80b AP/\B6;2\86f\BAK\DE\D0\FE\B0r4]\80\00\FE\FETҏ\B2@P\80\C1\99JXuW3\E0.M\D3\ECsp\8FTT\D4\00=$\8D\B7\B8\C9_I\B7;u\A7o\F3L\C5?\E0\C0\81\9F92\D7\EE>\B0\ABa/0\00\D9sW\81\9B\F4\E7\EE.\E0v\E2wT8\00(ő\A1GQ6\E6\B247\FFE%\FB\9Cn>\EEC\BF\EF\00ը\ABSE\AD\BC\E5䙲\BF\DBc.Dӟ9
+ \00\BC\E1e<\C0\FC\EF@|\F1v\90W)\00\8Ei߀,e[#VK@\AD*\F6\BBoL\C0@\9E\DC\FF\FB=\F8t\E4W+\F9U@\E0f\8Dk\84\88\98\F9\F8\E0}Z{\83\B2@\BAvy\8FK\F8\ABC~\EAĿ\BCi\8F~\A4{\00\8D\AA`\A8\CDV	܃\C4\DE\F5@\C4E0y\D3\00\B0C\93\C0A\C0<PP\AA\EAa\84\EE*\A1tN\88\C24Q\D0;o\E1ݪ8G\80\A2\95\C1\B8\94
+\E3\80Cޏ\87\8AH\A1\B0(*(ksx\A14\B0\81.n`\8B`L\9BP3B4\00:4\DB@Z\A0\8Ach	>\F0\81\94\FF\A0$ \81F \82<\8A\E0\D0\00xP\C6A\9C1\8D\8BX#\C7\E0F\FA\95\E1/\88\E4\Ђ\A8\00'@\C1
+$	\94\00\90@\000\C0~TdBƐ\80\B5\C0\91y\FB@
+`\00\83HR)P\C1&W\B8\C0\97.\E8$	i"W\92\F0\89\AAC\F6\80\AFe\C0)\F0$	 )II\B2\A0$\00\C1B\F0\81\B0\E0\9B,H\C1:\A0\87\EB\E5\99\C9\F4B0\D6.#\82\AD!@\C1L@\82\D82\981\98\E4$uI\80\E0\9F'\E8\E5/eM\94Ac:KgF\C8\D0\CAf`y\94\A6
+h\F9D\D2\93l\81X\B0\82\9C@78\C17[\00\83J^\92M\A8B\BBP4\D1\FF\81gI\D1j\BA\E0\A6e\C1M]\A0\82k\BA @թ$\F1؁P\80\C64gV\AA\CCe\BE\EB$\80\A8=-Z\CD\C0\00\A7-\D0\E8@c0\83Ā@
+\AB/e@V\9C\00\8F$\B8\C1Ė\CAԅ\A2T\8E\F5\CCd
+l9I\AAZ\A3;mY\81
+V\A0v\B53\00lP\BF\A8 \8Fy\FC\D8\DAV\964\00!\C8c	P\80\82\Z\F4\AE\92\C4*%\C9\CA\AEr\B5\AB\A0\ED\EA`\C1\83\94\E0\99\9C#4\B0'U4V\9Do\A8c\)KӋZ4\9Fݬ\80
+X\AF\96\A0mAa;K\\C2V\B2\96\9EZ{\A2\D7n\E1\88\90\E94\E5:\CBH\A2 \98\C5)%\D9\D9\CF\B4\C0\F5\EAp\C1I\DEo\CA\E0(\88\FFA
+\86\C9\\B287\F2\80tQ[ٹb6\92T\DDnVw\D6\DE\CE \BC\E2%\EEpK`\C2v\BD'X\AEJ\DF\EB\841h \B2\9D&mizW\AANR\BF\DC
+\EB7,ZᎷ\B8\E4-lhS 
+,\98\C18\A1\82\A2:\D4sµ\A5(\F2\A9Y\BDv\BC\C1
+0\88	\CB\E3΂\D6(\E8@{-\82b1P\A1\B5\A3\84i+c\FCfW\A3P\FE\A9\86,\DA\C1\B8\BC!\E6*
+\D0+\E4\D39\C5R\D0\00\A4{\C7L֗\96\97\C5/\865\CA_\EFx\B4\E5-08E \82\D4@\A70(N\FC\E5\A3D\C9
+j\E5Z\D9&W4\A3Q\EBg\81\\E1ƹ\C7\E4U\9D9O\9A\92\C0\C4^\EEs\8E\9Cd\9C\D6\CC\F6=t5\FF\ADU
+sX\C7\E3\FD\F0HEP\82=\9Ev\C2 \C04:5m\84#\8FY\B2\F4\8D&\9A3{W\FD\EE\D6\C7v\F4\A3I˂\D0\8F\AF5\89e\9DJZoz
+`\B1\A7\CD|fQ[\98\92zms\B0=,\E0\93\D5w\2ei\8B\82X3\CCٮ\98Bte\FB\EA	\D7\BB\862\B0Cgo\96\CE}\A4\F6\B81IYs\9F\DDG\A0\8A\BA\CDWG\B3\B6\E8\C5h\BC\B3\EDfT\F7x\B8\C6\E6\80]\D9}G\93\BE5\F8@p"T\E1\8B\80\E7	\E6j_\8A\E2v\E12\B8q`\ADlo\8Ej\93\D5\FA\DE7eQK\82
+\BC\A2\E3\AF7 h
+[8\BFlNyw\EB
+b\AC\00\94\00A\CCe>\E8|\80\D9T8\97\8B\81s\8F\EB|\F8\E2H\80\FF\82\9A\A6\F7\A2?\DD+\9C\E5\CE\E8y\8BA\BBe^ٳ\9E\B6\E6o\90\FA\D4\D9S\F5\90A\F0\C0j\E5\DB\F5ۂ\FD\AB4\A0h\EB=\\z\8BH\FEt&c\9E\82\B3\E6q\9Cߑ\BB\8B|\A7\8C\BA_\85<\C8A\DE)\F2wS\F0\F4\EE\B6\D1G\B0\DAl`\9B\g\FC\B8i\DE\CFq\CE	e\90\BB\87^8\A5\EEdX\C0r@Gpq\EB\D5\DD\EEO\C1Zep\AE`$\DEeK_\FAZܓ%\A0\E7\980\AE\C0>_N\C9\FE\8D \E4^\9C3\F2\00\E3\E2\FD<\F0Ex\9EV-0,\FAo:R\88\00\94x\C1\9B\DE\F4}\BB\9D\9E%\B0\85\80\BC>\F6\D9\80Na{R`yv\B7+\B0\00=\80)\DA\D4{Ywz \B0G\FF0p;\B7i\87k\F4\B7\81n'Y;\C0\85\B2\00\85\C2?\98}X\80\B8\97&tR}@G\DB4\DCTT}4\80\83ҥ\81Hw\84G\B5
+\B0\00\B72+\AF7F
+t\82N\F1)hyy\93\80H(\E0\DB! \83y\A4X\98\85+\80I;\B8\83=U!`@'\D2b)\FCG%\889\DAw\82\D3}\E8ք\D4\F2z:\00\83TH\85Ӕ\85\97\B4\85\؅\83vGҗV;@(\94b)\97b(gxD,\81\84
+\00KD\E6}T\80\86cD%0\87S\83\93\A5\87\F6Ǉ=HO\88uc(+s"\84\84X\84s\F2H\95\D7qU \82h\F8z\93\C8M\B0Y\EDƇn\87VF& \86
+0.\91h(\FF\85.\D6w\86\84r \D8")\A8\82\AAH#H\8AT\C2\00\DCDGvW\9Ah\8BQ\95G&p<\8Av\82\86\D0@D%\D0J\F1\F3\D9ǈn\D8gc \82"\F8zT2.\F0\8CЈXhՃ\E1\862\8D6`cD(\C5R(\B931TR'z\F0
+\AE\93\8A\CE\F6}\86\90
+x(\F0\8D\D2%Sv\8FT8\85e;\B0\8F	\E8\8FtR3)S)_\93iE\96{#8+\B32.	\C8M\E2\8D
+\B9M0\E8\90$`\91d2F#I+P8S\860d\82I\C0\8B\97B,\A9\00AH\89-y\94G8p:\00\84\82\8A\FEX\005\A91\C1㑯\C0\B4V
+X2 -\A6\89\E3\C2))~d\F9Ky\FF\9EH}cȍ\86X'SI\95UY\00\C7(r\F0eo0\82\A3ԕ\85\C8
+H&e\F2\00:\C0\94h\89\96\81\C9\92\84!\F8\93\ACH'R\006I\95\E1R\90\A1`
+v\F9#4J\F1\94\CEB-=\00~kY&\91X*\EBH\92Ų\80\A5R+5\F9\98pYD:)2\94\C9`q@y9\84\92(\88\B0\95	\B8\97\F9\94\C5B'\A7Y)\E0R0p91\F0<\A8\B0<	\9Bp\E0/\A3D\9BO9F@*-8\9A1Y\9D	Y'\E0\B29\8E\A9\9A\C3	\00\006\A8\B0\EFQp\00I\E3\980\00\91\F8\9C\A4B*[I\8A\CFi\88\B5\9C\EB\DD\D9.\B7\A0Υ\C1@\A3\9E\A4(\93\C3R\9Dʛ\D89\00\DAi\9F\F7\B9D\A1\80\95m\A5$\B1\8A\FFy0Њ\92\B8\8FOI&\BBi\9B\D9Y\9F
+\BA\A0\00\90\00sI\97V\C0T\CA 4Q*
+\9A\90\CFi\9B.
+\8AR)\00\F5	\A2\F79\00\B5+\D5 \C8Y\DD؝Z\9D\F0\99\90]\E9\984J\A3\F0\91|vBi\92\8Eި1\FC\9Fj\88\8426DZ\A4 \00\E7\C3
+\E9\95\F2\A1\EE\F2\A2)+\90\98\A0VZ\A4	 \99\FF\B6F\B1i\00MJ\95	\8Az\86\D8)\9Cej\A4ã\A5j
+\C6Ҧp\E9\98eh\9D\BE\A9.^Z\A7\93\A5x\AA\A4\B19\A14\9A\9E\B6Ҩ\B6\82\A0UJ\A8e:\A2\CDV<z`,\92\8A\99*\A3\83*\A9pن\87
+>z 7\9E:J\A6ک\9EJ\95<К\AE\85?q@3\A9\BA\9D\A9:\AB\DEy8\C1\E0\AAL\84\AA\B4\BA\AB\FFT\B9\00\94Z\A9 c4|ʫĺ\A0r\A9\A8`\00\BAZ\ACΊ0HzsUs\A9/\F3\AC\D6
+\A2/\A4;\B30\A3\D7\FA\AD\00墭\F7\B2\AD\94\9A\E0\9A\AE6C\00\E6\AA]\B2 \82誮\F4\DA.6\9Aق>3E\91Z\AF\E0\00\8A\9E\B2 (Ӭ\FEz\9F\FDz2Ю\EE\DA\83p8\82\00T\BA\AB\9B\A9\A6\EA\ADۙE\BF\9A\A6\E1A\FE3*K\AB\9CJ\AF\98\99\9E%\CB:CE\BD\F1\B1\A5\E43\83Ҙ\84\BA\9D'\BB\B0\BC\8A\9Eyٕ]\9C4\B0\FB\B0\B6\D1$>#&i\B3}*\A3H\8B\B4\9BJ\B3Eڳ\F5\A9\B4\BA\B3\8D-\E0B\A4\A3\84\A6\EB಄ Q\E2,Uk\B5G\BB\B3Q\9B\9ER\8B\A0\FF4\AA\A9ꨶR+\84h)ɘo\00w*\B0\C7\D1$\\BB#Vr)\A8\89\B4F{2\E8	.\9A\B4};1\8C\BA\B6\A6B,\A4\99\B8$\E9\96\EF\AA\F8\AA\8C\80!9%\C6R}\A8\B9\A9
+\9B\B6<[\A79[\863\E9\8B\D7	\BA\D796\EF\F2\B3@\DB\8Cp\B7Qb,=\00\9C<;\A8\F1\A9\A5\AA\A9\86;\93\9Fۖ\A0['\A4C\00GĪ\E7\93 *\94k%\D2b+\9C\8A\AA(;\ACeJ\BBnK,#h\BB\D7\F9\96\AF4\00\BC\92\A4q1	\80\B7S*\A8u\8A\B4ϊ\B6S\FB\95\89\FB\BCRY:=r\AA\81f\D2-S\A4\9D\84\9A\B2\D7*\BE\9E+\BA$\89<\D5+\E7\E1\B1\C0\CB\A2"\B21z\B1K\A7\FFڹ\95⼸.\EE»\FFG\84S\92VA	0;%U;\AB\F4[\AF̫\9B\BE\981\EDb\BA>P3A\C1U1	3C\C0\D2\AB	\FB.\FC\B6\FC\DA.\C1$|\BDj\C0Gt\BD\822%\E7\DB\C2\F5+\A3z\B9\8D\85\D2\C3\D3ѱ\CD\D59<\F0*l\C0>|\A5\00\AB\97#I\BA\00P\82i\BE\8B\C3c\F0
+\A88O\E3\96\CA\C5\C4ʨv2\82\D5Z\C4F\ \B3v,\93\AD\ABH\B1\9BC\C6\F5j\C6\F2\C99\A4\B4L\8CĿ\EB\C6W\A3AmĦPL\C7\CBKņb\C5\EE\A4\F3\D0ƈA\BDъ0\84\9C\B0͹\97\93\C7h\C1\C6\C0*"3\AEU\C9d\B0^I'\9Cc\BA4Q
+\8Cc\F0#\E5\C9Q<ɦ\D2.\96\9C7\CA\C1*\FE˪L_\F1V\FF\AC\DCʙɘ\ED\F25':\D1$&Td\B0d0Ȼ\ABz\9A2\8Cy\81z1:y\CBT\C0X\BB̄<\9B\F2\D2.p\A4`\91Z\̚\9CC
+\A0͑,\AB\EDBy`\A3%vA> Cv\C2\E3\B0ʬ\CE\C5z}`\B3\D2s\C4"\E4\8C"3
+H\AA\FA\BC\CCנ^,Ͳ
+\94H~\9C7\EF\90\CC	\AD\CD"
+\A1,1
+\E1|
+#1И\A1:H\8A\D0\CD\CA\D0\C4\C3P\F3A\E6\F0
+M\BCC~A0\B7T\90\CF%ͫGz\A2<\C1`|\8C\8C\9D4=p\D3\CBܰD@]\F5\D4y3\D3W\A3\A8ϊ\C0F\AE\D04\8DqD@\D1Ԩ|\CD-\91\CAꚞ6M\C8\FF\D0ZNC }"M\E9\FC\AF\E9Y\D5\F7\C9-\F1\D3@=\E4\A1ʪ3\D6}*\BFp
+\97(L\CC}W\B3%\C7\D6f\DB\D7p\89\B5сm\D7i\C2ԫ\AEy9ƈ=ԗL\D7u\E9ػB\D8T@\D2\F5+\BB\88M\95\FC\J\C1\D5\E90\D8\9D\AEy\A9ב<	bګq\D7\ED\DA֪-֡\ED׌0#\D5|\DA\F9\81\CF&\CB׷\BDV\8C@ \99<kG\BF\BD\C2\C1\ED/\930#\A7l
+\A0\92\C8S`\B2\B1\CBڄ\DC\DC"ܪ\CC 2X\EB\9F\DF:\C5ʽ\DC\AA@\F2\DC\E2QЩ\AD\AE:k\DDt\AC\D8e@\DCōy\C3 \C8-\D9Q\CB\DEdl\D9q\00\DF\F1]
+\C7\EC\B0E]\AF:+\DEc:\84\B0[\BC\C7\EC\B8D\CD\C1\FF\F7M\E0ݳK\91\E0\C6=\90=\9E
+\AE\EB
+\E1J\B5&6|÷\C1\DDH\8A\DF\E1\FA\E0\BEX\8B\D9|B\B2`]\C7\D9I\E2Q\BCL\C0\FE\8D\88I\DB\EA\BD\E1'>\DEq\A7\E2\8D(\DF"s\E7,2>1:\DEN\E3@~{,\C1\FAm(\CE\E3=\00\DDP\E3\D8\EB%\8A\EC\CER \E5\F4\9A\E4G\DE\C2~\A36N$\8Aq.\8CtJ_>\E0U\8E\9F\83\B0M\EE\E4\00r\E6Q~F\DF
+\E6mn僀hA\E4i>\E5 \DC\E6\A4\E7r\EE\E7\8A\C1u.\E0\C1\99\E7z\AE\FC`\E8um\E6\EFQI'\82\E6-\EC\DES\EB\DB\E7)\A2\D0\F0
+	\C0\A3v~\AD:Kٷm\AB\C0\C2鍍\E8;\A9%^\\EAS0+S\AE\E4\FFn\E0g.\E9\93\EA\95\DE@1\DA>`\88\BF\DD\E8y>È\D8e\FE)\A2\DEO󈅒\E9\8E\FE\E8GT\CB\EC{ސ\FE	p\CE\C4\FE\E5\EC\E8qp\BE\BB⾞\ED@\EB\E5\ED\F6
+\DAm\8E\EEr\AE\FE\EA\B0\FC\E0\EE^\EE\ED\9A\DE\C2\D1
+6X.\AD؞\C0\EDj\EE\EDT}\E2\FB\CE*h}\ED\FFN\B0ܱ!\F7\AE\DEޛ\E7sYX\BD0=\E7\DD\D0\00P\9E\A7\8E\EA\DFN\E8W\F3
+\F0\BFج%%,\F1
+`\9F\AET^\E5y#\DA \E5\E0L\9EA\EE	e\90_"\B392\F0\8F\EB\E2\BD\F14\FF\BF\A2\CF5L\A9\D0=\95^T\9570\86@\EF\F2\EC\DE\E3\BA\DE\ED\D5\B2\9E!\DF\F1\E4Qp\85\FF3\80]@\86\D7\s\E2\AF]Y\F0.\B7\EF\FC\E1+\B17O\8EZ\91trvS0\B0\8A<\E0\E0U\CF\E1\B4n;\A9P\E0"K\B8
+\83\F64\E6\F45\F5T\F5\FF\AC/\CF\E1\F4\C3\B7\C0A\80\88o\F7/\95^xu_)\F0\F8S\E2\EDR\BD\E4\F1\EF\A5\C4	螐\F8\C1\FA\8A_W\FAd\F6S0\B2\F2\AFQ\BBܚ\E8\CA^\C70\CE9\FF\FAvL?uh?\A5\F855\FA\B7/
+0\F5\C5
+\CAB\9FЃ6j\924h\F6\81\E4\8E	MGQ\D75INa\B4I̟%a\FC\C3\8Cب\C5cAT
+\E7{v\F9b#\99M
+\F4w]_\FAMoU\B4\AFp@\E0
+-\84\90T.\99Mg30\90\FF\9EU\EB\9BU\9EP.+\F6\83]\AE\DC\9DV\AF\87\CB\DB\E2s\C3^/\D8\9F\D7\EF\F9}\FF\90\EFdp%\C6\EE\D0\CE\C5\D0\E5e1\D1\F1%\CDB\A2\C1\E0@KS)\8A``4Ts0\E5%L,\EC쌭\D5\C3
+V\C4Q\A6\EE.0Ww\B7\8F\B0\A5\AB\F4\D1T\D1Б\CE8
+cBS+@\C0\93
+\DA\FA\80\C6l\AC\9B\E6\C1U\
+\B6\H\A3D2&\AC\91\D7\FD\FD\CF\F77&\85\91n{\FB\90θ\AE^\AD\F26(Rxp)a.d|Q\E6\C68\89r\CCa\90C"\86U\EC\E0u\847B0`\90\EDkT\A6Q$*&Q\9A\B0\80\00\C2%<	\A8&\A7R(\90\95A\C5bQ\B8\89\E3,\B6\D9\D0\C8\DB\99\EA\FFQ"\A4!C\DB9B9\F5\98\D5)\D6`\90\B0\00	N)\D4r\96e\82\82K
+:.\B6q\FB\82\E2\83\A1s1t\90q\F7'Ǧ{\FD\9C \E1E\BD\A9\F9\F6\C5X\CBV\9D\9D:+[.{y \C2(o\9A-[#-\AC>3\C2\DD0w(x\BBy\E3{Z\CF\D3P\D5s!\C6\E1dl\CB\CEZF\B9
+D\96\\D9rN"\CB\DCz\D1\C2E#Bp(
+z\9A
+$\EA<t5\EA\A7	\DBڥ\CBک(5\DBF\BCX0\9B"|w/\90\ACu^|\F7\DB\FC9t6ԑ\FE\93\9D\AFL \81\B5\D6\D4b\84\B6\E2\D82&\91ac\ACf(\E0\BD
+\AF\B1a8z\B3\83\A5F \A1
+\F4k\E5\83A`h\90c\FF)\00\99\90\EE~٪0\93\C6;\89\AAD\E6{\81\A5\FC\D0\C0\A0\82b\B2\90H-\A4\99\C1\D4*\8E\96\D0\F20
+|\83\A0\E2\E9\AEZ\A0\8F!\B6\\ECh\84l \B0\C0h,\E3\B0\E2ƋM\C1\94\AA\EBGX(,\92΁(\C0\80\E1D2\EC\9Eza.\CA\D1\C8\00BR@nK;\909.\85/\DF\F90V\EB\AEc\CF0\94\EC0f0\E2\85)\97\AEN"\C0\93\90\94ʶ\D8\FC<\A1@?\D0 A5\B0\B25-\8DS\8C\8EFu\EAC$-s+\B5bKf\86\94n<	\C7Hzz\8D%\A2l*\B5\C8\00\F0<\C0\80l1|\ED\9EK\81\84Y=\E0`Q]\D1@B`-0\FA\BD\C7_\F5#Lp\A8w\FF\D2_̼\D4*\FA\ECQ'\C7\ABE?%\A2\96\C8\00\B2\CD[f \EER%\835\DC,!ġ0\D8\E0\83\8E\C94\D3Xx#\96w\DE\C2\E1^{?$\B0@\91\8AU\B2\C6GY\ABAf\E3ǑT\886N>A\D8=f\B8\00\F7\BC\D4>\8AÕ5D)]\C9@\8E-\FE\F0J\90\F9\ED66G?!Ln(\85\D5,\81eb+5v1\D90\8D9\BCHfHg\B4&Z\00\E8\E0P\C5dᇁ\99\E9\89a%{i\8B;\EE\80pZ1\902\A8;\D8\FAb\AA\E5۷[w\8Fu1\84O(\B6\D8'\93ﻗ\E1,\99C\C9H4i\A3\C36v΍(\EA.Ka\BCe7\9A'\BF\FBV\E9\C0/\BC\E3\8Ewg\EEd\CB9\B7\FF^O\B3\DB\FA3\CCe\90\AD\BE\BA8d\9BO\9Fc\EBi\CB\87\9A\E0u\9C\AC:\D5U\BD\B3\FDտc\8C\F1\E4\DD\D5\E7\BAޕ'?d^M\9F\EA4\8Bo@\F3\E5\F3ߟx\91s\A4\8FM
+Z\9B\9Bx\F5[8Ic\DC\EB\DEA\ACհ\86\F5`"AA\C10\87\BBA\00\EE|K;\D99#vA\EEX=9V\F4\F8)J\F1s0YĮ\96\98\93cA\E6\81a\C0֯o\CD\E5
+\C4\C6\F7\A8-\AF\82\\B8\E0j2\98\C1ի\88e\E33\AC\A3)@\81	\F4u\B6\97\AD\90\85L\BC\9A$1b0(taTS\AB\B3%`\98\AB\AE\D3!4>\EC`5\B0\DA\ED47D"b0\83d[M˼\B1\D6\CC*8b\8A\FF
+>\C8?\98e\91\C3\C7Z\00x\88\9B\91NS7*` ET`\8D\A2@Uò\B5\83a\81,s\94\C7IY\CA=vg|\F02mִ\99x\85\A4\A0İB[\CAo\840\DCLU\A6\82\A0cf`ȑA%ASdr<\9F\B0\AA\B6?Q֑P1e\99R\C9%]:\F2
+\A2_GL@EP"ҏ!T\E4/ň\82dա*0\C0&[\F0\C3\F3pi\98\819t0\F0\00dj\E2n\C4\D0\C7\F2'A\CA\A0QI%\A6\A4\B7\BE\D4m\AF\84GZ\D3.d,\EA\A1\C6A\C6\CBI:\D4!\A3\A3\C0\91\BD3\82\F6\BC'\84&\BBl\DD\C0R\9F	͐<~#|!I As\D6ݔc`F\FF\B8|\A4-+\BC\CC\D45\C3\CEЕ'\8C7\D5ȃ\85'\CD\A4h\CFH\9D0\80\85q\F2)kf\E7\FC\D9\D5o\A1ū1\ADQU\8EZ\CEsF\E2\84L\8BZ\92*Ò#A\A5\93kE#\E1H4Y\B4\ADB\86\AE\88	\9A	8\80TTU©zh\80| \\DC	\8C\99\CBҰz\D5s\A8s\84m6\D4֙\A13\EF\C0\81	{\A96I\8F\89\E1TFh\86\A9FTe\A0\EB	\83\80\B9E[\A4:0\88`\9D\80\92b5\#\D3Z;\D7\CF\C7JЊ\F1S\A5\A6\E1\C5F$\E2Yn\E2\C5f\D7ʯ\9B\921\90td\F5\8CjCҺ\90\8B\A9=\A7;k\89\A7\C66\B0\B4\80U\C1w\E8\B6j\8BEa\A5 \CA\C8\B4\97IIF	\9E\FF\EB\CDe\E4d'z\885\99\A4\AC%Y\AAlު)\9A
+\AC\A9\A7e\DDPd+^'\C0\8D!ȭ\E3\B7\DE~\F6\85\D0;\EEI\F8t\D4H\9ES\86\99\D5\E5H\BC\B7\F6k\A9\D8\C6i\94K\FF6ȉ\F5\B5M\8B]\88\FBh\CC\80upK\B4\9C\97\C2\F0\B3\B0\FE\B9\C2&\DAf\97\8E\F4\AC\9B\99\92s\F6y\A1p\00O\EBE\B8\A2\F6\9AFY	\89'B\A2\A3\A0j\CCD"0\A4\F6Z\D9ʁ\EFV\F7\AA\CEC&_8'[\9D\F9j\A9+\A6\AC\93q(C\AE\A8\FCm[\81Լ*\C9\E6\99Y\81k6ߔ$Xr\8A3μ\84g\EBV\BA-\9B\90\FB\A7\C2\F5&R`1V֋\BBL\CEⓞ\DBr Q\DCӥ\FF\83ƭ&\AA\A9;Ŧ\E1\DA\F8\86\C1@\E6Ti\00@o\90\9A\FB\AA\D8i\A4\81\B3\96\91\9D\A3W=\E0:\DBzŏ\F8ð\96x,\F1\A9$\D7,L\B3\BC\DC@R\97Vظ\B9d\E3B"x\80\99+
+al\C9!\D3\C46\D0!\B1Ϋ\89S\84\00\CB\F6u\93\ECS\DA\[\B9|\F8d\94\E2:\F3#zO<\AB63E߹\92\A7_\E3N\8E\82\A1\EA
+	D\80n\BEVB\B6\84p\B8\AD\C9[\AC\F8.\A0\C8\C6\E8L\D5L\9D\97\D5A\B3	`%G|ݜ\91\B1\98\B4\98\E6\C3\C3m\BAl\8C1+וc\B6\A7\AC-\B7^e\F1\FCL\E3\00\E0x\C7\E3\AD\C4T\A2
+\A8Y\91:F\FF\97]#\AB\A8wV\F4\94\F5M=\C8\!\F10\B7ej=>\B9\93\C5\FF6\E3/\B9\AF\BB\88H\BE\B3\A7\ADx*`\80^'=\00\CBh\FAny\B15\B5v\ED\A2O\FFk.iƸ/\94\99\A2"\A9\E4<\80\BD\8F\C72'\8E\DC\DE\EF\F2\A8}Y5\AA:\8C
+~\F9IjIEO\92C\DE0\CC6\E9JP\BA:F\B5B9\BB\A5\9E\BC:sns\BC\BE}\F0\A1]\8B\CDn:\AFお첔\9B\96\C5\F97ݺiڲI\A3\FCt\92\B3\8CfDw꫰\86\A8\A9+\C8\CF\F3c\81O"9\88\DF\EC\9Cm\B1/J\98L\E0\F2\A6t\F3\D2\BA)|cq\F7\FC\89y\B9\CCL\ABx\EA)\BF\C0\E34b\B0\97\B4@\85\FA\9C\A0+4\80<\E0\B2\84VKƪtƮ\A8ڂ\8Bnd\D0\E2\8A\CB\CE#Ť\8D\FD\A8\EDrh\AE\9DD\87\A9\8E\FF\8CШ"Y\80\89\B8\FA\A9\8E\BAn^\B4\A4:p \00\97\A0\FBv\CBe\E9ЬB6&\CF\E6\CEJ\DB\A9\EF*\A82\E5\FCăo\E6
+\F8\A8\CD;T\C0\EFpĹ\AE\EBjn\A9bL\B2\8EK\C5nC\A8"\A7\8C"\ED,&\F3\8E
+\A7j\F0\F5`o\A6bf\E7n/\ED\DB\C2çV\CD\F3Vm\ED\F8\F2E\BF$!\86\8A\E7\D4\FA\D8\C9\F8<\E7ί\C96D\9CJ\A1\A3\9Cr \00\C5A\D8\A7rd$\E4eCJP\F9\F0\E7\E4\F0\EF\90,\FCj#\AFTn\A2\92`0t&\80\F8a\ACp6X\86t\C4\F7l\D4~N\80$qQ\F8
+F\E0\F0n\A2\C6\85\B8Z\88\B8\9C\E8\DBHp\F6L\8E\BE\D4NS|J\FFA\B4,*C\C2\C4l\CFP\A7\F9\BA\A8\A3+m$\B3\B4\8Bg\91\FCg[-H\A0c\DAm"tqk6m\A0l)\86\A0Q\E7\C2(m\C4\E7jm3\8A\F3\FEM1\F2\00\A0\83	=\EB_\9A*\CFX\91\F8^\8C\A0\9C\8D%\AE\91^\91K > \BC\90I\00\86\C2+\E7\83@\E8Ȯ\8Ct\E2\8BMp\A3\00΅~	s\E4\91\DA\C2$A\F2\D1R1\9B\EE\B7\C1]P\CB\E0\8C\8A	\CC\DB\C8	k\DCţJ\000F\BC\C0P"9`+\B2Z\AD_R\CE%\E3\CA\C36CP\F1Ą\8E\93\E1[\F6\00%\97\EC\A8\F0AG\B4\ECtf2\B1\90\B2\A8\CB\E3\CBlI!\95#lH\A0!o\91\AA|R"7`q\\A6\84+f\90\AA\BF\AC\FFǸ\F4!z\F2\DCH\87\D5\ED G\88%\84`\A8\E5\E21\D1\F8%\8C\ADˊ\F1M\FE\90\DE\C5U\B6\A2:\C4,;F\A4\90iD\B0-\F9.Ma\84\F7\90\8B\9C\94*\9B\C0o\D1\A3A\AE-\CFmz0w0\D1\D6n/\D1\F0Vr\C5\EA
+5\A5ުo\B6B\B8\90l@ D2I\00\80J0\F3\00m\F0C\E85XM\F3 \AE*Ym\DCV\D1\E4\DEQ)/\C5\FAb\D9
+\98i\B8\CAϴN\91\D5\D3\F6\A8"\F0B\CB13gu\BE\C5,;`(@\87@P\E0\AD\00\8Fs5\80+%\C5#ڜ\F0\AC\E7#\B1\D1\ED\B6\E2:Ys\F9\85\E1hв)+\EC\8A\C5f\A3N\ED\D6FQBI\94\CCr\\D0E\F2=\808\E3\FF\D3\A0(\E9\95TMf6
++\DAn~\94\AC\F2\B0\ED.\85\8A\EA\8AKI;Q)߰\F0\D8\9B\BE\AC\AC\A0k\D40\92\D0ttӱ\FE\CF\D9SD|\00\F5\88\C0C\DB\C08=H_\F6E\9Bh\AC$h\92A\CDN$K\CB\F6\E2\CC$A\A0\8C-\80\D8\F0;\AEJW\B2\E1\9C0=\AEܤ\DE(Ts,\948\E0H
+@C\A2 \9AtP\D8R]\A0\B47\FBͅFۦ\E2\F3oDBF\FB\8C\9A܋\DE\D0)zT\D2\EC\F4m\B4֮9\B1k\EB\82&\D3H\D1\00&$\83\00
+ &\80Oð=\00\00\D5e\C4\EE\FCr\F4\9CJ\C54\E5na\F1<%Gu5uas\EC3\85\B6/6\F3J{nu\FF\AE\F9~n\86\D6\A8\DCPbD\89b2T\D5\E0+@\81\00\A0P5UuM\FF9m\B7,
+\F1a\CAl\A40\D7T\F1\98G\88N\C0\EAU\F7G\85jX\F52W\A7q0\B4\8Ar\91PL\92&\94y\9E\84l\98\C36\C0i"\A4\D4\ED\A0\00$\00\8D\B6\95\BB\95"\AFdx>g\ECH\90\DB)\90-r\D4\E4ԵW\DB5\DF\F2\CDR\EA\E6Uc\95\F2M\88\EB*\CC\C3\C5.\F5h\89W'< DjbsV\D0%D'\B6\D8\D2$O\B9\EB\AD@\E7^c\C0\9C\CA\E7K\E1᥄\A8\AB\E4\CE\E4\F5\A1\C65:\CFn\9D\BA\00\D6\F6\EBD\BB\85\8Er\A7f\A7Ug\C3v\F5\8C\F3\85r\85\8C.\B0\CBHRل\F1\D8I@\EF\FFc/\CA]\DFj\A3VXQ\AC?\8E$\FB\8BV񐥔\C6m\96`\C5\D6p\D1 jz\D6U\ABmJ\C5uz\88\8C\AEْ\E6p\C0^\F8\82n\EB\F6\B7\82\CBd\C1	`\80\90I\D4\CF$/M\9F\95Qϧ!m\96N\8F\F4p\C5V\D1-U\8D\E1 \BD\EC\BA\\D2ޞ\D5\EEe\B2#s$\A0\DC\EC\B7J6\B2\8C\EAz\9A\EDRG\93\F9(TpS\B7ȅu[Wgv\9D\AEb\B7\A8\C5~nm&יa@P\C6ED\F1\82\FEF\8F\C47s\85\F7\B12m,\E1N\F9\DC\E91g6p>\C0f\C1Vzs\F6uk\D0\E9\C4J\8BU\F3F\86\96\B8ʂ\BE\D7rŃ\F0(\8F\A6)s\9D}\ED6\FCN\8Cn\93\CBX(\94>\B5b\9C\D7~\EFw[\A9\FFW]\CAx\D3q\C9D\86\9D\84ԙx\95\D0]\E6\E5\88v\F2\88\92\E8\80Ii\81\B5\BD\DE\EB(\F1\95\E5\95y'L\A7~W\83\F13
+\F0\AD7\E4\EEmd\9C)p}\E1|F@Jz\C7w\B8\86w\EB|H\89e\80x\F31\ACT\ED\A7\DC\C6\B8\82Pj\B6\87\A3\F7\87\F9]6\A0gWF\89\95\86IN\A1\F5\84+\87\89\9B؉\F5\E0\D6l\CD\A7q\90\A8\88\F4ȔN)\8Bi49I\D7\D0F8\80\FD)wƘ~	z\CFb\D3x\8D\B8\DCx\C8\C2\CA\F6\E8|f\E5\8E\FF\00\8A;f\8F-\86w\D9؅=\E8\8AY\8B\B5\AF\86\8E\AD\82\A0\83\B9\91\8DԌ!9>%y\A7\86\8D\ED\A6ԋ\9719\93\F1\A8c츓\8A\F7\FF\98\8F٧\85Iم\F9\94h\F4\81\A36Ά\\96xwbzg\99\96/\93\83?\8E\94uy\97\A0\88}B\00\82y\98\E1\94\A3xj\B8\86\9D;\A8\85K\D9\81˟C\9A\CDg\9C/fp\99`\B19\9B\A1j0\D3\91\B9\8A\BDY>`\AA\A0\A3\E9\8E\EE9\98\85\F9\9C;ⓏY}\00\85\83\FC\98\92	\F9\B1\D6U\9Cu\87w\EAwNѥ\9F\F9\F4\9F\D9r\87\A2\AF\B8i\D7\F5\973Z\8\B9\A1O\83\00\81r\A4\D5y}~g\83\B8\99cX\93\D1g\87\F1\F9G\9F=z.ZZ\D8\C0\96\85\97\95\868\A7u\9A\87Z\A8Q\E3ya\DA\00\A2\FBX\99_X\9A\C8w\A95\A8\9A\E9\B7~\9Fw\9F]\E1\A9\DD\E1\B6\99\A6\91\86YC\9A\B6z\A7;\C6\9C\FFz\AC\B3c\E6ڧ\DD\FA\A1C\E0\BC\87}\A88\89\F4(\896\A8\AB\AD\B9\A3i
+\E2\BA)\8Aڨ\AD\BA\AFOٯ\8D\A8\AD\E9\AE
+@\D0](@\A4\C7p\AA{g\A6'\BA\94\8Fh\8Cyګ}\AC\81Z$\9B)\D2X\8DG:\A2k\BA\94;[\<\80"۴\85\B2\BA~3\BB\AA\91y\A2g\B4=\E0\AB\E7t\9Fq\D6f\DB#(;\B5cz\B5\83\A7\B5u\9A\91U\97\88\BB\A5)\9B\\E6\94p|\8Ay\BB{\FB\AB\F5y\9F\A1\FB\B0Q[\AAs\9B\B3=[\83`\D9f)๽{\AC5\C0\E6\9A(\00\B7e:\BB?ٷE\B8)[\BD\BF;j.{\AA7{\A2\9B\A7\EBW\D2;\BF\E3\B5\AB\9B\AA}\87qڷ\B7;\AA\F7Y\B6\j\9B\AE\AB\BB\BFyx־ǭ9\9A\C0%ܰy\C1\A18\BE\ED\BA\C1E\9B\BB\F1\DBË۸\8F\BB\C1s\9B\B77ܧ<ŉ\9B\B2E\DBfo\BC\C1K\DC\C4\99\ |\C6O\9B;\A65\FB,\E9\FB\B7\81\FBǡ\9B\C2azǛ\9C\C7!<<j\BCmܺ7\FC\C6}\B8\DB3ʥ\FC\A9\8D{N\99\BCɷ\9Cʽȩܽ\81R\CC\C7|\AE-\80,\C0\CC\9C\CA\C5|\CB	ʻ<Χ\9C\CA\F7{\AE\D58\CCü\CF	\D6\F0<\CF?|\CF\C5}/\9D\D1)\FB
+]\CA\D2]\A4\D1\CB<Ƀ\00\00!\FE3Reduced 32% @ www.raspberryhill.com/gifwizard.html\00\00\00

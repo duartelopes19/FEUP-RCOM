@@ -6,53 +6,32 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <signal.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <termios.h>
 #include <unistd.h>
-#include <signal.h>
 
 // Baudrate settings are defined in <asm/termbits.h>, which is
 // included by <termios.h>
 #define BAUDRATE B38400
 #define _POSIX_SOURCE 1 // POSIX compliant source
-
+#define FLAG 126
+#define A 3
+#define C_SET 3
+#define UA 7
+#define RR 5 //just to test
+#define REJ 1
+#define BCC A^C_SET
+#define BCCUA A^UA
+#define BCCRR A^RR
+#define BCCREJ A^REJ
 #define FALSE 0
 #define TRUE 1
 
-#define BUF_SIZE 256
+#define BUF_SIZE 5
 
-#define FLAG 0x7E
-#define A_RECEIVER 0x03
-#define A_SENDER 0x01
-#define C_SET 0x03
-#define C_UA 0x07
-
-#define ESC 0x7d
-
-#define START 0
-#define STOP 1
-#define FLAG_RCV 2
-#define A_RCV 3
-#define C_RCV 4
-#define BCC_OK 5
-#define BCCUA A_RECEIVER^C_UA
-#define BCCRR A_RECEIVER^BCC_OK
-#define BCCREJ A_RECEIVER^STOP
-
-int alarmEnabled = FALSE;
-int alarmCount = 0;
-
-struct termios oldtio;
-struct termios newtio;
-
-//volatile int STOP = FALSE;
-
-void alarmHandler(int signal)
-{
-    alarmEnabled = FALSE;
-    alarmCount++;
-}
+volatile int STOP = FALSE;
 
 int main(int argc, char *argv[])
 {
@@ -78,6 +57,9 @@ int main(int argc, char *argv[])
         perror(serialPortName);
         exit(-1);
     }
+
+    struct termios oldtio;
+    struct termios newtio;
 
     // Save current port settings
     if (tcgetattr(fd, &oldtio) == -1)
@@ -117,130 +99,196 @@ int main(int argc, char *argv[])
 
     printf("New termios structure set\n");
 
-    //write SET
-    unsigned char set[5] = {FLAG,A_SENDER,C_SET,A_SENDER^C_SET,FLAG};
-
-    (void)signal(SIGALRM, alarmHandler);
-
-    //read UA
-    unsigned int state = START;
-    unsigned char buf[1] = {0};
-
-
-    while(state != STOP && alarmCount <= 2) {
-        if (alarmEnabled == FALSE)
-        {
-            write(fd,set,5);
-            alarm(3); // Set alarm to be triggered in 3s
-            alarmEnabled = TRUE;
-        }
-        while (alarmEnabled == TRUE) {
-            if(read(fd,buf,1)==0) continue;
-            switch (state)
-            {
-            case START:
-                if (buf[0]==FLAG) state = FLAG_RCV;
-                break;
-            case FLAG_RCV:
-                if (buf[0]==FLAG) break;
-                else if (buf[0]==A_RECEIVER) state = A_RCV;
-                else state = START;
-                break;
-            case A_RCV:
-                if (buf[0]==FLAG) state = FLAG_RCV;
-                else if (buf[0]==C_UA) state = C_RCV;
-                else state = START;
-                break;
-            case C_RCV:
-                if (buf[0]==FLAG) state = FLAG_RCV;
-                else if (buf[0]==A_RECEIVER^C_UA) state = BCC_OK;
-                else state = START;
-                break;
-            case BCC_OK:
-                if (buf[0]==FLAG) state = STOP;
-                else state = START;
-                break;
-            default:
-                break;
-            }
-        }
-    }
-    alarm(0);
-    alarmCount = 0;
-    alarmEnabled = FALSE;
-
-
-    //write I(0)
-    unsigned char buf1[BUF_SIZE] = {0};
-    gets(buf1);
-
-    unsigned char I[BUF_SIZE] = {0};
-    I[0] = FLAG;
-    I[1] = A_SENDER;
-    I[2] = 0x00;
-    I[3] = A_SENDER^0x00;
-
-    unsigned char bcc2 = 0;
-    int pos = 4;
-    for (int i = 0; i < BUF_SIZE; i++)
-    {
-        if(buf1[i]=='\0') break;
-        bcc2=bcc2^buf1[i];
-        if(buf1[i]==FLAG) {
-            I[pos]= ESC;
-            I[pos+1]=0x5e;
-            pos+=2;
-        }
-        else if(buf1[i]==ESC) {
-            I[pos]= ESC;
-            I[pos+1]=0x5d;
-            pos+=2;
-        }
-        else{
-        I[pos]=buf1[i];
-        pos++;
-        }
-    }
-
-    I[pos] = bcc2;
-    pos++;
-    I[pos] = FLAG;
-
-    write(fd,I,pos+1);
-    
-
     // Create string to send
-    // unsigned char buf[BUF_SIZE] = {0};
+    unsigned char buf[BUF_SIZE];
+    buf[0] = FLAG;
+    buf[1] = A;
+    buf[2] = C_SET;
+    buf[3] = BCC;
+    buf[4] = FLAG;
 
-    /* for (int i = 0; i < BUF_SIZE; i++)
-    {
-        buf[i] = 'a' + i % 26;
-    } */
 
-    // gets(buf);
 
     // In non-canonical mode, '\n' does not end the writing.
     // Test this condition by placing a '\n' in the middle of the buffer.
     // The whole buffer must be sent even with the '\n'.
-    // buf[5] = '\n';
+    unsigned char ans[BUF_SIZE];
+    int receiv,bytes;
+    int alarmEnabled = FALSE;
+    int alarmCount = 0;
+    
+  
+    void alarmHandler(int signal)
+    {
+        alarmEnabled = FALSE;
+        alarmCount++;
+    }
 
-    // int bytes = write(fd, buf, strlen(buf)+1);
-    // printf("% */d bytes written\n", bytes);
+    // Set alarm function handler
+    (void)signal(SIGALRM, alarmHandler);
+    int state = 0;
+    int STOP = FALSE;
+    //int flag = 0;
+    while (alarmCount < 4 && !STOP)
+    {   
+        if (alarmEnabled == FALSE)
+        {
+            bytes = write(fd, buf, BUF_SIZE);
+            printf("%d bytes written\n", bytes);
+            alarm(3);
+            alarmEnabled = TRUE;
+            
+        }
+        receiv = read(fd,ans,1);
+        if(receiv == 0){
+         continue;
+        }
+        switch(ans[0]){
+        case FLAG:
+            if(state == 4)
+                STOP = TRUE;
+            else
+                state = 1;
+            break;
+        case A:
+            if(state == 1)
+                state = 2;
+            else
+                state = 0;
+            break;
+        case UA:
+            if(state == 2)
+                state = 3;
+            else
+                state = 0;
+            break;
+        case BCCUA:
+            if(state ==3)
+                state =4;
+            else 
+                state = 0;
+            break;
+        };
+        
+    }
 
-    // Wait until all bytes have been written to the serial port
-    // sleep(1);
 
-    // unsigned char received[BUF_SIZE + 1] = {0};
 
-    // bytes = read(fd, received, BUF_SIZE);
-    // received[bytes] = '\0'; // Set end of string to '\0', so we can printf
+    unsigned char info[30]={0};
+    int end = 14;
+    info[0] = FLAG;
+    info[1] = A;
+    info[2] = 0;
+    info[3] = A^0;
+    info[4] = 5;
+    info[5] = 4;
+    info[6] = 4;
+    info[7] = 5;
+    info[8] = 6;
+    info[9] = 7;
+    info[10] = 8;
+    info[11] = 126;
+    info[12] = 10;
+    info[13] = 0;
+    for (int i = 4;i<13;i++){
+      info[13] = info[13]^info[i]; 
+    }
+    info[14] = FLAG;
+    for (int i = 4;i<end;i++){
+        if(info[i]==0x7e){
+            info[i]=0x7d;
+            for(int x = end;x>i;x--){
+                printf("%d\n",x);
+                info[x+1] = info[x];                           
+            }
+            info[i+1]=0x5e;
+            end++;
+        }
+        else if(info[i] == 0x7d){
+            info[i]=0x7d;
+            for(int x = end;x>i;x--){
+                info[x+1] = info[x];                           
+            }
+            info[i+1]=0x5d;
+            end++;
+        }
+    }
 
-    /* if(strcmp(buf,received)) {
-        printf("%s\n","Error");
-    } else {
-        printf("%s\n","Check");
-    } */
-
+    
+    unsigned char conf[BUF_SIZE]={0};
+    alarmEnabled = FALSE;
+    alarmCount = 0;
+    int posconf = TRUE;
+    state = 0;
+    STOP = FALSE;
+    //flag = 0;
+    while (alarmCount < 4 && !STOP)
+    {   
+        if (alarmEnabled == FALSE)
+        {
+            bytes = write(fd, info, 30);
+            printf("%d bytes written\n", bytes);
+            alarm(3);
+            alarmEnabled = TRUE;   
+        }
+        receiv = read(fd,conf,1);
+        if(receiv == 0){
+         continue;
+        }
+        printf("%d-in state %d\n",conf[0],state);
+        switch(conf[0]){
+        case FLAG:
+            if(state == 6)
+               if(posconf)
+                   STOP = TRUE;
+               else{
+                    bytes = write(fd, info, 30);
+                    printf("REJ - %d bytes written\n", bytes);
+                    alarm(3);
+                    alarmEnabled = TRUE; 
+                }  
+            else
+                state = 1;
+            break;
+        case A:
+            if(state == 1)
+                state = 2;
+            else
+                state = 0;
+            break;
+        case RR:
+            if(state == 2)
+                state = 3;
+            else
+                state = 0;
+            break;
+        case REJ:
+           if(state == 2)
+                state = 4;
+            else
+                state = 0;
+            break;
+        case BCCRR:
+            if(state == 3){
+                state = 6;
+                posconf = TRUE;
+            }else 
+                state = 0;
+            break;
+        case BCCREJ:
+            if(state == 4){
+                state = 6;
+                posconf = FALSE;
+            }else 
+                state = 0;
+            break;
+        };
+        
+    }
+    
+    
+    
+    
     // Restore the old port settings
     if (tcsetattr(fd, TCSANOW, &oldtio) == -1)
     {
@@ -252,3 +300,4 @@ int main(int argc, char *argv[])
 
     return 0;
 }
+

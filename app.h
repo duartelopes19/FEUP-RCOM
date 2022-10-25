@@ -33,4 +33,4 @@ void applicationLayer(char* serialPort, LinkLayerRole role, int BAUDRATE, int N_
 int llopen(char* port, LinkLayerRole role);
 int llwrite(int fd, char * buffer, int length);
 int llread(int fd, char * buffer);
-int llclose(int fd);
+int llclose(int fd, LinkLayerRole role);

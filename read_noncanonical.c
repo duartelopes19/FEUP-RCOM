@@ -11,6 +11,18 @@
 #include <termios.h>
 #include <unistd.h>
 
+#define FLAG 126
+#define A 3
+#define C_SET 3
+#define UA 7
+#define BCC A ^ C_SET
+#define BCCUA A ^ UA
+#define C_RR 5
+#define C_REJ 1
+#define BCC_RR A ^ C_RR
+#define BCC_REJ A ^ C_REJ
+ 
+
 // Baudrate settings are defined in <asm/termbits.h>, which is
 // included by <termios.h>
 #define BAUDRATE B38400
@@ -19,31 +31,9 @@
 #define FALSE 0
 #define TRUE 1
 
-#define BUF_SIZE 256
+#define BUF_SIZE 5
 
-#define FLAG 0x7E
-#define A_RECEIVER 0x03
-#define A_SENDER 0x01
-#define C_SET 0x03
-#define C_UA 0x07
-
-#define ESC 0x7d
-
-#define START 0
-#define STOP 1
-#define FLAG_RCV 2
-#define A_RCV 3
-#define C_RCV 4
-#define BCC_OK 5
-#define BCC_READ 6
-#define BCC_RR A_RCV ^ BCC_OK
-#define BCC_REJ A_RCV ^ STOP
-
-struct termios oldtio;
-struct termios newtio;
-
-
-// volatile int STOP = FALSE;
+volatile int STOP = FALSE;
 
 int main(int argc, char *argv[])
 {
@@ -69,7 +59,9 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 
-    
+    struct termios oldtio;
+    struct termios newtio;
+
     // Save current port settings
     if (tcgetattr(fd, &oldtio) == -1)
     {
@@ -108,130 +100,141 @@ int main(int argc, char *argv[])
 
     printf("New termios structure set\n");
 
-    //read SET
-    unsigned int state = START;
-    unsigned char buf[1] = {0};
-
-    while(state != STOP) {
-        if(read(fd,buf,1)==0) continue;
-        switch (state)
+    // Loop for input
+    unsigned char buf[BUF_SIZE + 1] = {0}; // +1: Save space for the final '\0' char
+    int state = 0;
+    while(!STOP)
+    {
+        // Returns after 5 chars have been input
+        int bytes = read(fd, buf, 1);
+        //buf[bytes] = '\0'; // Set end of string to '\0', so we can printf
+        //n--;
+        switch (buf[0])
         {
-        case START:
-            if (buf[0]==FLAG) state = FLAG_RCV;
+        case FLAG:
+            if (state == 4)
+                STOP = TRUE;
+            else
+                state = 1;
             break;
-        case FLAG_RCV:
-            if (buf[0]==FLAG) break;
-            else if (buf[0]==A_SENDER) state = A_RCV;
-            else state = START;
+        case A:
+            if(state == 1)
+                state = 2;
+            else
+                if(state == 2) //C_SET  
+                    state = 3; 
+                else
+                    state = 0;
             break;
-        case A_RCV:
-            if (buf[0]==FLAG) state = FLAG_RCV;
-            else if (buf[0]==C_SET) state = C_RCV;
-            else state = START;
+        case BCC:
+            if(state == 3)
+                state = 4;
+            else 
+                state = 0;
             break;
-        case C_RCV:
-            if (buf[0]==FLAG) state = FLAG_RCV;
-            else if (buf[0]==A_SENDER^C_SET) state = BCC_OK;
-            else state = START;
-            break;
-        case BCC_OK:
-            if (buf[0]==FLAG) state = STOP;
-            else state = START;
-            break;
-        default:
-            break;
-        }
+        };
     }
+    unsigned char conf[BUF_SIZE] = {0};
+    conf[0] = FLAG;
+    conf[1] = A;
+    conf[2] = UA;
+    conf[3] = BCCUA;
+    conf[4] = FLAG;
+    int bytes = write(fd,conf,BUF_SIZE);
+    printf("message sent\n");
 
-    // write UA
-    unsigned char ua[5] = {FLAG,A_RECEIVER,C_UA,A_RECEIVER^C_UA,FLAG};
-    write(fd,ua,5);
-
-    // read I(0)
-    state = START;
-    int bcc2 = 0;
-    int bcc2_received = 0;
-    unsigned char buf1[BUF_SIZE] = {0};
+    state=0;
+    int BCC2 = 0;
+    int BCC2_received = 0;
+    unsigned char info[256];
+    int d = 0;
+    int i = 0;
+    STOP = FALSE;
     
-    int i = 0, d = 0, k = 0;
-
-    while(state != STOP) {
-        if(read(fd,buf,1)==0) continue;
-        switch (state)
+    while(!STOP){
+        int bytes = read(fd, buf, 1);
+        printf("%dth state with value-%d\n",state,buf[0]);
+        switch (buf[0])
         {
-        case START:
-            if (buf[0]==FLAG) state = FLAG_RCV;
+        case FLAG:
+            state = 1;
             break;
-        case FLAG_RCV:
-            if (buf[0]==FLAG) break;
-            else if (buf[0]==A_SENDER) state = A_RCV;
-            else state = START;
+        case A:
+            if(state == 1)
+                state = 2;
+            else
+                if(state==3)    //BCC1 tem de ser esclarecido
+                    state = 4;
+                else
+                    state = 0;
             break;
-        case A_RCV:
-            if (buf[0]==FLAG) state = FLAG_RCV;
-            else if (buf[0]==0x00) state = C_RCV;
-            else state = START;
-            break;
-        case C_RCV:
-            if (buf[0]==FLAG) state = FLAG_RCV;
-            else if (buf[0]==A_SENDER^0x00) {
-                state = BCC_READ;
-                i = 0;
-            }
-            else state = START;
-            break;
-        case BCC_READ:
-            buf1[d]=buf[0];
-            d++;
-            if (buf[0]==FLAG) state = STOP;
+        case 0:
+            if(state == 2) //C_SET  
+                state = 3; 
+            else
+                state = 0;
             break;
         default:
-            break;
-        }
-    }
-
-    for (k=0;k<=d;k++){
-        if(buf1[k]==0x7d){
-            if(buf1[k+1]==0x5e){
-                buf1[k] = 0x7e;
+            if(state==4){
+                while(!STOP){
+                    printf("%dth state with value - %d\n",state,buf[0]);
+            	    if(buf[0] == FLAG){
+            	        STOP = TRUE;
+            	        printf("Aa\n");
+            	    }else{
+                        info[d] = buf[0];
+            	        d++;
+            	        printf("%d\n",d);
+                        int bytes = read(fd, buf, 1);
+                    }                    
+                }
             }
-            else if(buf1[k+1]==0x5d){
-                buf1[k] = 0x7d;
+            else{
+                state=0;
+            }
+            break;
+        };
+    }
+    for (int i=0;i<=d;i++){
+        if(info[i]==0x7d){
+            if(info[i+1]==0x5e){
+                info[i] = 0x7e;
+            }
+            else if(info[i+1]==0x5d){
+                info[i] = 0x7d;
             }else{
                 continue;
             }
             for (int j=i+2;j<=d;j++){
-                buf1[j-1]=buf1[j];
+                info[j-1]=info[j];
             }
             d--;
         }
     }
-
     if(d>0){
-    	bcc2_received = buf1[d-1];
-    	buf1[d-1] = '\0';
-    	while(buf1[k]!='\0'){
-            bcc2^= buf1[k];
-            k++;
+    	BCC2_received = info[d-1];
+    	info[d-1] = '\0';
+    	while(info[i]!='\0'){
+    	    printf("%d unstuffed\n",info[i]);
+            BCC2^= info[i];
+            i++;
         }
     }
-    
-
     unsigned char ans[BUF_SIZE]={0};
     ans[0] = FLAG;
-    ans[1] = A_RECEIVER;
+    ans[1] = A;
     ans[4] = FLAG;
-    if (bcc2 == bcc2_received){
-    	ans[2] = BCC_OK;
+    if (BCC2 == BCC2_received){
+    	ans[2] = C_RR;
     	ans[3] = BCC_RR;
     }else{
-    	ans[2] = STOP;
+    	ans[2] = C_REJ;
     	ans[3] = BCC_REJ;
     }
     printf("%d %d %d %d %d", ans[0], ans[1], ans[2], ans[3], ans[4]);
-    write(fd,ans,BUF_SIZE);
-    
-
+    bytes = write(fd,ans,BUF_SIZE);
+    printf("message sent\n");
+	
     // The while() cycle should be changed in order to respect the specifications
     // of the protocol indicated in the Lab guide
 
