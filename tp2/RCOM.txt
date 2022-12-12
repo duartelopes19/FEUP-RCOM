@@ -1,0 +1,42 @@
+1º fazer systemctl restart networking
+2º fazer (no switch) /system reset-configuration
+
+3) fazer ifconfig em todos os pcs para ver se os ip estao certos
+    3.1 o pc4 tem que ter eth0 e eth1 definidos, pc2 e pc3 so tem de ter definidos eth0
+    3.2 ifconfig eth0 172.16.Y0.254/24 -- tuxY4
+    3.3 ifconfig eth1 172.16.Y1.253/24 -- tuxY4
+    3.4 ifconfig eth0 172.16.Y0.1/24 -- tuxY3
+    3.5 ifconfig eth0 172.16.Y1.1/24 -- tuxY2
+
+4) fazer no gtkterm, dentro do switch (a entrada T4 tem de estar ligada ao switch)
+    4.1 /interface bridge add name=bridgeY0
+    4.2 /interface bridge add name=bridgeY1
+    4.3 /interface bridge port remove [find interface=etherX] -- X corresponde as portas do router que estao ligadas ao eth0/eth1 de cada tux (2,3,4,5 normalmente)
+    4.4 /interface bridge port add bridge=bridgeY0 interface=ether3 -- para o tuxY3
+    4.5 /interface bridge add bridge=bridgeY0 interface=ether4 -- para o tuxY4 eth0
+    4.6 /interface bridge add bridge=bridgeY1 interface=ether5 -- para o tuxY4 eth1
+    4.7 /interface bridge add bridge=bridgeY1 interface=ether2 -- para o tuxY2
+
+5) criar as routes:
+    5.1 route add -net 172.16.Y0.0/24 gw 172.16.Y1.253 -- no tuxY2
+    5.2 route add -net 172.16.Y1.0/24 gw 172.16.Y0.254 -- no tuxY3
+
+6) fazer ping e verificar se esta tudo
+7) fazer no gtkterm, dentro do router (a entrada T4 tem de estar ligada ao Router MT):
+    7.1 /ip address add address=172.16.1.29/24 interface=ether1 --ether1 porque é a entrada para a rede do laboratorio que suporta NAT
+    7.2 /ip address add address=172.16.Y1.254/24 interface=ether2 --ether2 é a porta a que o cabo esta ligado no router
+
+8) EXP4 STEP2 | fazer default gateway das routes (apagar as routes de antes):
+    8.1 route add default gw 172.16.Y0.254 --se correr isto no terminal do tuxY3, tuxY4 é default de tuxY3
+    8.2 route add default gw 172.16.Y1.254 --se correr isto no terminal do tuxY2/tuxY4, Rc é default de tuxY2/tuxY4
+    8.3 route add -net 172.16.Y0.0/24 gw 172.16.Y1.253 -- no terminal de tuxY2
+    8.4 /ip route add dst-address=172.16.Y0.0/24 gateway=172.16.11.253
+    8.5 /ip route add dst-address=0.0.0.0/0 gateway=172.16.1.254 --default gateway do router
+
+
+FTP_FEUP = ftp://ftp.up.pt/pub/kodi/timestamp.txt
+FTP_FEUP2 = ftp://anonymous:qualquer-password@ftp.up.pt/pub/kodi/robots.txt
+FTP_KODI1 = ftp://anonymous:qualquer-password@ftp.up.pt/pub/kodi/screenshots/kodi-addons.jpg
+FTP_KODI2 = ftp://anonymous:qualquer-password@ftp.up.pt/pub/kodi/screenshots/kodi-videolibrary.jpg
+FTP_KODIAPK = ftp://anonymous:qualquer-password@ftp.up.pt/pub/kodi/snapshots/android/arm/kodi-18.0-Leia_alpha2-armeabi-v7a.apk 
+FTP_VIM_ROBOTS = ftp://anonymous:qualquer-password@ftp.vim.org/pub/ftp/robots.txt
